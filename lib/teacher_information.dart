@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:school_management/teacher_database.dart';
 import 'package:school_management/teacher_signin.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Teacher_Information extends StatefulWidget {
   @override
@@ -15,9 +17,17 @@ class _Teacher_InformationState extends State<Teacher_Information> {
   String sectionchoose;
   List sectionitem = ["Science", "Commerce", "Arts", "Others"];
 
-  String _t_fname,_t_lname,_t_id,_t_add,_t_contact,_t_email;
+  String _t_fname,_special,_t_id,_time,_t_contact,_day;
 
-  Firestore information = Firestore.instance;
+  final CollectionReference brewcollection = Firestore.instance.collection('teacher_information');
+  String uid;
+
+  Future<void> sendDataTeacher()async{
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    await DatabaseserviceTeacher(uid: user.uid).updateuserdata(_t_fname,_special,_t_id,_time,_t_contact,_day);
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>Teacher_SignIn()));
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,10 +82,10 @@ class _Teacher_InformationState extends State<Teacher_Information> {
                   padding: const EdgeInsets.only(left: 25, right: 25),
                   child: TextFormField(
                     keyboardType: TextInputType.name,
-                    decoration: InputDecoration(hintText: "Last Name"),
+                    decoration: InputDecoration(hintText: "Speciality"),
                     onChanged: (input){
                       setState(() {
-                        _t_lname=input;
+                        _special=input;
                       });
                     },
                   ),
@@ -103,10 +113,10 @@ class _Teacher_InformationState extends State<Teacher_Information> {
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     decoration:
-                    InputDecoration(hintText: "Present Address"),
+                    InputDecoration(hintText: "Time"),
                     onChanged: (input){
                       setState(() {
-                        _t_add=input;
+                        _time=input;
                       });
                     },
                   ),
@@ -133,10 +143,10 @@ class _Teacher_InformationState extends State<Teacher_Information> {
                   padding: const EdgeInsets.only(left: 25, right: 25),
                   child: TextFormField(
                     keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(hintText: "E-mail Address"),
+                    decoration: InputDecoration(hintText: "Day"),
                     onChanged: (input){
                       setState(() {
-                        _t_email=input;
+                        _day=input;
                       });
                     },
                   ),
@@ -195,19 +205,20 @@ class _Teacher_InformationState extends State<Teacher_Information> {
                         borderRadius: BorderRadius.circular(10)
                     ),
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Teacher_SignIn()));
-                      setState(() {
-                        information.collection('teacher_information').add(
-                            {
-                              'First_Name': _t_fname,
-                              'Last_Name': _t_lname,
-                              'Teacher_ID': _t_id,
-                              'Address': _t_add,
-                              'Contact': _t_contact,
-                              'E-mail': _t_email,
-                            }
-                        );
-                      });
+                      //Navigator.push(context, MaterialPageRoute(builder: (context)=>Teacher_SignIn()));
+                      // setState(() {
+                      //   information.collection('teacher_information').add(
+                      //       {
+                      //         'First_Name': _t_fname,
+                      //         'Last_Name': _t_lname,
+                      //         'Teacher_ID': _t_id,
+                      //         'Address': _t_add,
+                      //         'Contact': _t_contact,
+                      //         'E-mail': _t_email,
+                      //       }
+                      //   );
+                      // });
+                      sendDataTeacher();
                     },
                     child: Text(
                       "Save Information",

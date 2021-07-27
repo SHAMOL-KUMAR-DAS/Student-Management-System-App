@@ -21,9 +21,9 @@ class _Student_InformationState extends State<Student_Information> {
   final CollectionReference brewcollection = Firestore.instance.collection('student_information');
   String uid;
 
-  Future<void> sendData()async{
+  Future<void> sendDataStudent()async{
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
-    await Databaseservice(uid: user.uid).updateuserdata(_fname,_lname,_roll,_add,_g_name,_g_num,_g_email,_class);
+    await DatabaseserviceStudent(uid: user.uid).updateuserdata(_fname,_lname,_roll,_add,_g_name,_g_num,_g_email,_class);
     Navigator.push(context, MaterialPageRoute(builder: (context)=>Student_SignIn()));
 
   }
@@ -228,7 +228,7 @@ class _Student_InformationState extends State<Student_Information> {
                     color: Colors.white,
                     minWidth: MediaQuery.of(context).size.width * 0.8,
                     onPressed: () {
-                      sendData();
+                      sendDataStudent();
                       //Navigator.push(context, MaterialPageRoute(builder: (context)=>Student_SignIn()));
                     },
                     child: Text("Save Information"))

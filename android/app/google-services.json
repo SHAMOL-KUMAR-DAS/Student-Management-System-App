@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "66254997987",
+    "project_id": "school-management-948db",
+    "storage_bucket": "school-management-948db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:66254997987:android:cc9640b29b8b8f238478d6",
+        "android_client_info": {
+          "package_name": "com.shamol.school_management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "66254997987-a7kahsvh51dagrkedtb869hvvv3s476j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC14J--X4XODnW4Ft-qtrR2XwZTd98YIiU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "66254997987-a7kahsvh51dagrkedtb869hvvv3s476j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

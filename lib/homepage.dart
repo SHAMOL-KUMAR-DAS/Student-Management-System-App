@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:school_management/coverpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:school_management/routine.dart';
 
 class Homepage extends StatefulWidget {
   @override
@@ -219,7 +220,9 @@ class _HomepageState extends State<Homepage> {
                         child: FlatButton(
                             height: MediaQuery.of(context).size.height,
                             minWidth: MediaQuery.of(context).size.width,
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Routine()));
+                            },
                             child: Text("Class Routine",style: TextStyle(fontSize: 18),)),
                       ),
                     )

@@ -11,7 +11,7 @@ class DatabaseserviceTeacher {
 
   Future updateuserdata(String _t_fname,String _special,String _t_id,String _time, String _t_contact,String _day) async {
     return await user.document(uid).setData({
-      'First_Name': _t_fname,
+      'Name': _t_fname,
       'Special': _special,
       'Teacher_ID': _t_id,
       'Time': _time,

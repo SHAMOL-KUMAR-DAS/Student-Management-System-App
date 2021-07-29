@@ -67,7 +67,7 @@ class _Teacher_InformationState extends State<Teacher_Information> {
                   padding: const EdgeInsets.only(left: 25, right: 25),
                   child: TextFormField(
                     keyboardType: TextInputType.name,
-                    decoration: InputDecoration(hintText: "First Name"),
+                    decoration: InputDecoration(hintText: "Name"),
                     onChanged: (input){
                       setState(() {
                         _t_fname=input;

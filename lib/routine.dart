@@ -17,13 +17,6 @@ class _RoutineState extends State<Routine> {
       await Firestore.instance.collection('teacher_information').document().get().then((ds){
         tname=ds.data['Name'];
         sname=ds.data['Special'];
-        // clas=ds.data['Class'];
-        // roll=ds.data['Roll_No'];
-        // add=ds.data['Address'];
-        // gname=ds.data['Guardian'];
-        // gnum=ds.data['Guardian_Contact'];
-        // gmail=ds.data['Guardian_E-mail'];
-        //print(fname);
       }).catchError((e){
         print(e);
       });

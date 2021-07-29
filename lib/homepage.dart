@@ -38,8 +38,8 @@ class _HomepageState extends State<Homepage> {
         appBar: AppBar(
           actions: [
             FlatButton(onPressed: (){
-              //Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>CoverPage()));
+              Navigator.pop(context, MaterialPageRoute(builder: (context)=>CoverPage()));
+              //Navigator.push(context, MaterialPageRoute(builder: (context)=>CoverPage()));
             }, child: Icon(Icons.logout))
           ],
         ),
@@ -47,9 +47,9 @@ class _HomepageState extends State<Homepage> {
           SingleChildScrollView(
             child:Column(
               children: [
-                SizedBox(height: MediaQuery.of(context).size.height*0.02,),
+                SizedBox(height: MediaQuery.of(context).size.height*0.05,),
                 Container(
-                  height: MediaQuery.of(context).size.height*0.3,
+                  height: MediaQuery.of(context).size.height*0.2,
                   child: FutureBuilder(
                     future: _fetch(),
                     builder: (context,snapshot){

@@ -27,6 +27,8 @@ class _Teacher_SignupState extends State<Teacher_Signup> {
     }
   }
 
+  bool hidePassword = true;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -110,9 +112,12 @@ class _Teacher_SignupState extends State<Teacher_Signup> {
                           return null;
                         },
                         style: TextStyle(color: Colors.white),
-                        obscureText: true,
+                        obscureText: hidePassword,
                         decoration: InputDecoration(
                             labelText: "Password",
+                            suffixIcon: InkWell(
+                                onTap: visiblePassword,
+                                child: Icon(Icons.visibility,color: Colors.white,)),
                             labelStyle: TextStyle(color: Colors.white),
                             enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white))),
@@ -140,4 +145,17 @@ class _Teacher_SignupState extends State<Teacher_Signup> {
     //  ),
     );
   }
+
+  void visiblePassword(){
+    if(hidePassword == true){
+      hidePassword=false;
+    }
+    else{
+      hidePassword=true;
+    }
+    setState(() {
+
+    });
+  }
+
 }

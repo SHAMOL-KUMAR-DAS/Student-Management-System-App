@@ -25,7 +25,8 @@ class _Student_SignInState extends State<Student_SignIn> {
       }
     }
   }
-  
+
+  bool isHiddenPassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -122,9 +123,12 @@ class _Student_SignInState extends State<Student_SignIn> {
                           return null;
                         },
                         //style: TextStyle(color: Colors.white),
-                        obscureText: true,
+                        obscureText: isHiddenPassword,
                         decoration: InputDecoration(
                             labelText: "Password",
+                            suffixIcon: InkWell(
+                                onTap: _togglePasswordView,
+                                child: Icon(Icons.visibility))
                             //labelStyle: TextStyle(color: Colors.white),
                             // enabledBorder: UnderlineInputBorder(
                             //     borderSide: BorderSide(color: Colors.white))
@@ -171,4 +175,16 @@ class _Student_SignInState extends State<Student_SignIn> {
       ),
     );
   }
+
+  void _togglePasswordView(){
+    if(isHiddenPassword == true){
+      isHiddenPassword = false;
+    }else{
+      isHiddenPassword = true;
+    }
+    setState(() {
+
+    });
+  }
+
 }

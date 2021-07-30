@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:school_management/homepage.dart';
 import 'package:school_management/student_information.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:school_management/student_list.dart';
 import 'package:school_management/teacher_signup.dart';
 
 class Teacher_SignIn extends StatefulWidget {
@@ -19,12 +20,14 @@ class _Teacher_SignInState extends State<Teacher_SignIn> {
       formstate.save();
       try{
         FirebaseUser user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>Homepage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>Student_List()));
       }catch(e){
         print(e.message);
       }
     }
   }
+
+  bool hidePassword=true;
 
   @override
   Widget build(BuildContext context) {
@@ -118,12 +121,16 @@ class _Teacher_SignInState extends State<Teacher_SignIn> {
                         return null;
                       },
                       style: TextStyle(color: Colors.white),
-                      obscureText: true,
+                      obscureText: hidePassword,
                       decoration: InputDecoration(
                           labelText: "Password",
                           labelStyle: TextStyle(color: Colors.white),
+                          suffixIcon: InkWell(
+                              onTap: _togglePasswordView,
+                              child: Icon(Icons.visibility,color: Colors.white,)),
                           enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white))),
+                              borderSide: BorderSide(color: Colors.white))
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -166,4 +173,16 @@ class _Teacher_SignInState extends State<Teacher_SignIn> {
       ),
     );
   }
+
+  void _togglePasswordView(){
+    if(hidePassword == true){
+      hidePassword=false;
+    }else{
+      hidePassword=true;
+    }
+    setState(() {
+
+    });
+  }
+
 }

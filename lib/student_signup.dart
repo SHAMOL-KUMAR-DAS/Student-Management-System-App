@@ -24,29 +24,9 @@ class _Student_SignUpState extends State<Student_SignUp> {
         print(e.message);
       }
     }
-    // Future<void> userSetup(String displayName) async {
-    //   //firebase auth instance to get uuid of user
-    //   FirebaseAuth auth = FirebaseAuth.instance.currentUser();
-    //
-    //   //now below I am getting an instance of firebaseiestore then getting the user collection
-    //   //now I am creating the document if not already exist and setting the data.
-    //   FirebaseFirestore.instance.collection('Users').document(auth.uid).setData(
-    //       {
-    //         'displayName': displayName, 'uid': uid
-    //       })
-    //
-    //   return;
-    // }
-  //   firebase.auth().onAuthStateChanged((user) => {
-  //   if (user) {
-  //       // User logged in already or has just logged in.
-  //       console.log(user.uid);
-  // } else {
-  //   // User not logged in or has just logged out.
-  //   }
-  // });
   }
 
+  bool hidePassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -129,9 +109,13 @@ class _Student_SignUpState extends State<Student_SignUp> {
                           return null;
                         },
                         style: TextStyle(color: Colors.white),
-                        obscureText: true,
+                        obscureText: hidePassword,
+
                         decoration: InputDecoration(
                             labelText: "Password",
+                            suffixIcon: InkWell(
+                                onTap: VisiblePassword,
+                                child: Icon(Icons.visibility,color: Colors.white,)),
                             labelStyle: TextStyle(color: Colors.white),
                             enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white))),
@@ -159,4 +143,17 @@ class _Student_SignUpState extends State<Student_SignUp> {
       ),
     );
   }
+
+  void VisiblePassword(){
+    if(hidePassword == true){
+      hidePassword = false;
+    }
+    else{
+      hidePassword = true;
+    }
+    setState(() {
+
+    });
+  }
+
 }

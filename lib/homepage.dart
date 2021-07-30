@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:school_management/coverpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:school_management/result.dart';
 import 'package:school_management/routine.dart';
 
 class Homepage extends StatefulWidget {
@@ -38,8 +39,8 @@ class _HomepageState extends State<Homepage> {
         appBar: AppBar(
           actions: [
             FlatButton(onPressed: (){
-              Navigator.pop(context, MaterialPageRoute(builder: (context)=>CoverPage()));
-              //Navigator.push(context, MaterialPageRoute(builder: (context)=>CoverPage()));
+              //Navigator.pop(context, MaterialPageRoute(builder: (context)=>CoverPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>CoverPage()));
             }, child: Icon(Icons.logout))
           ],
         ),
@@ -69,80 +70,7 @@ class _HomepageState extends State<Homepage> {
                     },
                   ),
                 ),
-                // Container(
-                //   //color: Colors.white,
-                //   height: MediaQuery.of(context).size.height*0.3,
-                //   width: MediaQuery.of(context).size.width,
-                //   child: StreamBuilder(
-                //       stream: Firestore.instance.collection("student_information").snapshots(),
-                //       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot>snapshot){
-                //       if(!snapshot.hasData){
-                //         return Text("No Record Available");
-                //       }
-                //       return ListView(
-                //         children: snapshot.data.documents.map((document){
-                //           return Column(
-                //             //mainAxisAlignment: MainAxisAlignment.center,
-                //             children: [
-                //               Row(
-                //                 mainAxisAlignment: MainAxisAlignment.center,
-                //                 children: [
-                //                   Text("Name: "),
-                //                   Text(document['First_Name'] ?? " "),
-                //                   Text(" "),
-                //                   Text(document['Last_Name'] ?? " "),
-                //                 ],
-                //               ),
-                //               Row(
-                //                 mainAxisAlignment: MainAxisAlignment.center,
-                //                 children: [
-                //                   Text("Class: "),
-                //                   Text(document['Class'] ?? " "),
-                //                 ],
-                //               ),
-                //               Row(
-                //                 mainAxisAlignment: MainAxisAlignment.center,
-                //                 children: [
-                //                   Text("Roll No: "),
-                //                   Text(document['Roll_No'] ?? " "),
-                //                 ],
-                //               ),
-                //               Row(
-                //                 mainAxisAlignment: MainAxisAlignment.center,
-                //                 children: [
-                //                   Text("Address: "),
-                //                   Text(document['Address'] ?? " "),
-                //                 ],
-                //               ),
-                //               Row(
-                //                 mainAxisAlignment: MainAxisAlignment.center,
-                //                 children: [
-                //                   Text("Guardian Name: "),
-                //                   Text(document['Guardian'] ?? " "),
-                //                 ],
-                //               ),
-                //               Row(
-                //                 mainAxisAlignment: MainAxisAlignment.center,
-                //                 children: [
-                //                   Text("Guardian Contact No: "),
-                //                   Text(document['Guardian_Contact'] ?? " "),
-                //                 ],
-                //               ),
-                //               Row(
-                //                 mainAxisAlignment: MainAxisAlignment.center,
-                //                 children: [
-                //                   Text("Guardian E-Mail: "),
-                //                   Text(document['Guardian_E-mail'] ?? " "),
-                //                 ],
-                //               ),
-                //
-                //             ],
-                //           );
-                //         }).toList()
-                //       );
-                //       }
-                //       ),
-                // ),
+                
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.01,
                 ),
@@ -202,7 +130,9 @@ class _HomepageState extends State<Homepage> {
                       child: FlatButton(
                           height: MediaQuery.of(context).size.height,
                           minWidth: MediaQuery.of(context).size.width,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Result()));
+                          },
                           child: Text("Result",style: TextStyle(fontSize: 20),)),),
                     ),
                     SizedBox(

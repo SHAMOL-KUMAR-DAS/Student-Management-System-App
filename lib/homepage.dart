@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:school_management/coverpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:school_management/event.dart';
+import 'package:school_management/exam.dart';
 import 'package:school_management/result.dart';
 import 'package:school_management/routine.dart';
 
@@ -35,7 +37,7 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xFF39423b),
+        backgroundColor: Colors.white,
         appBar: AppBar(
           actions: [
             FlatButton(onPressed: (){
@@ -55,7 +57,7 @@ class _HomepageState extends State<Homepage> {
                     future: _fetch(),
                     builder: (context,snapshot){
                       if(snapshot.connectionState!= ConnectionState.done)
-                        return Text("Loading Data..");
+                        return Text("No Data Available..");
                       return Column(
                         children: [
                           Text("Name: $fname $lname"),
@@ -89,7 +91,9 @@ class _HomepageState extends State<Homepage> {
                       child: FlatButton(
                           height: MediaQuery.of(context).size.height,
                           minWidth: MediaQuery.of(context).size.width,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Exam()));
+                          },
                           child: Text("Exam Schedule",style: TextStyle(fontSize: 18),)),),
                     ),
                     SizedBox(
@@ -107,7 +111,9 @@ class _HomepageState extends State<Homepage> {
                       child: FlatButton(
                           height: MediaQuery.of(context).size.height,
                           minWidth: MediaQuery.of(context).size.width,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Event()));
+                          },
                           child: Text("Event Schedule",style: TextStyle(fontSize: 18),)),),
                     )
                   ],

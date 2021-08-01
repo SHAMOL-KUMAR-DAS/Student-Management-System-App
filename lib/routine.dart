@@ -9,18 +9,25 @@ class Routine extends StatefulWidget {
 
 class _RoutineState extends State<Routine> {
 
-  String tname,sname;
+  String _sub1,_teacher1,_sub2,_teacher2,_sub3,_teacher3;
 
   _fetch()async{
     final firebaseUser = await FirebaseAuth.instance.currentUser();
     if(firebaseUser!=null)
-      await Firestore.instance.collection('teacher_information').document().get().then((ds){
-        tname=ds.data['Name'];
-        sname=ds.data['Special'];
+      await Firestore.instance.collection('student_information').document(firebaseUser.uid).get().then((ds){
+        _sub1=ds.data['Subject_1'];
+        _teacher1=ds.data['Teacher_1'];
+        _sub2=ds.data['Subject_2'];
+        _teacher2=ds.data["Teacher_2"];
+        _sub3=ds.data["Subject_3"];
+        _teacher3=ds.data["Teacher_3"];
+
+
       }).catchError((e){
         print(e);
       });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,23 +39,46 @@ class _RoutineState extends State<Routine> {
         title: Center(child: Text("Class Routine"))
       ),
       body: Center(
-        child: DataTable(columns: [
-          DataColumn(label: Text("Day/Time")),
-          DataColumn(label: Text("9 - 10 AM")),
-          DataColumn(label: Text("10 - 11 AM"))
-        ], rows: [
-          DataRow(cells: [
-            DataCell(Text("Saturday")),
-            DataCell(Text("Math Monyeem")),
-            DataCell(Text("Physics Sakkhar")),
-          ],),
-          DataRow(cells: [
-            DataCell(Text("Sunday")),
-            DataCell(Text("Physics Sakkhar")),
-            DataCell(Text("Math Monyeem")),
-          ])
-        ]),
-      ),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: FutureBuilder(
+            future: _fetch(),
+            builder: (context,snapshot){
+              if(snapshot.connectionState!= ConnectionState.done)
+                return Text("No Data Available..",style: TextStyle(color: Colors.white),);
+              return DataTable(columns:[
+                DataColumn(label: Text("Day/Time",style: TextStyle(color: Colors.white),)),
+                DataColumn(label: Text("9-10 AM",style: TextStyle(color: Colors.white),)),
+                DataColumn(label: Text("10-11 AM",style: TextStyle(color: Colors.white),)),
+                DataColumn(label: Text("11AM-12PM",style: TextStyle(color: Colors.white),)),
+              ],
+                  rows: [
+                    DataRow(cells: [
+                      DataCell(Text("SaturDay",style: TextStyle(color: Colors.white),)),
+                      DataCell(Text("$_sub1\n$_teacher1",style: TextStyle(color: Colors.white),)),
+                      DataCell(Text("$_sub2\n$_teacher2",style: TextStyle(color: Colors.white),)),
+                      DataCell(Text("$_sub3\n$_teacher3",style: TextStyle(color: Colors.white),))
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text("SundaDay",style: TextStyle(color: Colors.white),)),
+                      DataCell(Text("$_sub3\n$_teacher3",style: TextStyle(color: Colors.white),)),
+                      DataCell(Text("$_sub1\n$_teacher1",style: TextStyle(color: Colors.white),)),
+                      DataCell(Text("$_sub2\n$_teacher2",style: TextStyle(color: Colors.white),))
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text("MonDay",style: TextStyle(color: Colors.white),)),
+                      DataCell(Text("$_sub2\n$_teacher2",style: TextStyle(color: Colors.white),)),
+                      DataCell(Text("$_sub3\n$_teacher3",style: TextStyle(color: Colors.white),)),
+                      DataCell(Text("$_sub1\n$_teacher1",style: TextStyle(color: Colors.white),))
+                    ])
+                  ]
+              );
+            },
+          ),
+        ),
+          )
+
+
     );
   }
 }

@@ -16,14 +16,24 @@ class _Student_InformationState extends State<Student_Information> {
   String sectionchoose;
   List sectionitem = ["A", "B", "C"];
 
-  String _fname,_lname,_roll,_add,_g_name,_g_num,_g_email,_class;
+  String _fname,_lname,_roll,_add,_g_name,_g_num,_g_email,_class,
+      _math,_phy,_chem,
+      _sub1,_teacher1,_sub2,_teacher2,_sub3,_teacher3
+  ,_event,_event_date,
+  _exam_date1,_exam_date2,_exam_date3,_exam_time,_exam_venue;
 
   final CollectionReference brewcollection = Firestore.instance.collection('student_information');
   String uid;
 
   Future<void> sendDataStudent()async{
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
-    await DatabaseserviceStudent(uid: user.uid).updateuserdata(_fname,_lname,_roll,_add,_g_name,_g_num,_g_email,_class);
+    await DatabaseserviceStudent(uid: user.uid).updateuserdata(
+        _fname,_lname,_roll,_add,_g_name,_g_num,_g_email,_class,
+        _math,_phy,_chem,
+        _sub1,_teacher1,_sub2,_teacher2,_sub3,_teacher3,
+        _event,_event_date,
+      _exam_date1,_exam_date2,_exam_date3,_exam_time,_exam_venue
+    );
     Navigator.push(context, MaterialPageRoute(builder: (context)=>Student_SignIn()));
 
   }

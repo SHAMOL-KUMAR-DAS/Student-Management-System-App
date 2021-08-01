@@ -48,16 +48,6 @@ class _Student_SignUpState extends State<Student_SignUp> {
                 child: Column(
                   children: [
                     Image(image: NetworkImage("https://cdn.pixabay.com/photo/2016/05/31/12/42/thumb-up-1426815_1280.png",scale: 8),),
-                    // SizedBox(
-                    //   height: MediaQuery.of(context).size.height * 0.05,
-                    // ),
-                    // Text(
-                    //   "WELCOME TO SCHOOL MANAGEMENT SYSTEM",
-                    //   style: TextStyle(
-                    //       fontSize: 16,
-                    //       fontWeight: FontWeight.bold,
-                    //       color: Colors.white),
-                    // ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.035,
                     ),

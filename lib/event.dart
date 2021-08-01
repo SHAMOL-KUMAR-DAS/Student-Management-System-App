@@ -27,16 +27,18 @@ class _EventState extends State<Event> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Center(child: Text("Student Result")),
-      // ),
+      backgroundColor: Color(0xFF79f069),
+      appBar: AppBar(
+        backgroundColor: Color(0xFF79f069),
+        elevation: 0,
+        title: Center(child: Text("Upcoming Event",style: TextStyle(color: Colors.black),)),
+      ),
       body: Center(
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Column(
             children: [
               SizedBox(height: MediaQuery.of(context).size.height*0.2,),
-              Text("Upcoming Event"),
               FutureBuilder(
                 future: _fetch(),
                 builder: (context,snapshot){

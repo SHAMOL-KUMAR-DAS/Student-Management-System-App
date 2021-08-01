@@ -44,7 +44,7 @@ class _Student_InformationState extends State<Student_Information> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xFF00ff11),
+        backgroundColor: Color(0xFFe9f518),
         body: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -64,7 +64,7 @@ class _Student_InformationState extends State<Student_Information> {
                   height: MediaQuery.of(context).size.height * 0.03,
                 ),
                 Text(
-                  "Create your account",
+                  "Student Account",
                   style: TextStyle(
                       fontSize: 16,
                       color: Colors.black,
@@ -235,7 +235,7 @@ class _Student_InformationState extends State<Student_Information> {
                   height: MediaQuery.of(context).size.height * 0.02,
                 ),
                 FlatButton(
-                    color: Colors.white,
+                    color: Color(0xFFff503d),
                     minWidth: MediaQuery.of(context).size.width * 0.8,
                     onPressed: () {
                       sendDataStudent();

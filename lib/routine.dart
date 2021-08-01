@@ -32,10 +32,11 @@ class _RoutineState extends State<Routine> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
+      backgroundColor: Color(0xFF272b28),
 
       appBar: AppBar(
-        //elevation: 0,
+        elevation: 0,
+        backgroundColor: Color(0xFF272b28),
         title: Center(child: Text("Class Routine"))
       ),
       body: Center(

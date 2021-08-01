@@ -37,8 +37,10 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFFe0535f),
         appBar: AppBar(
+          backgroundColor: Color(0xFFe0535f),
+          elevation: 0,
           actions: [
             FlatButton(onPressed: (){
               //Navigator.pop(context, MaterialPageRoute(builder: (context)=>CoverPage()));

@@ -29,8 +29,11 @@ class _ResultState extends State<Result> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFadbaff),
       appBar: AppBar(
-        title: Center(child: Text("Student Result")),
+        backgroundColor: Color(0xFFadbaff),
+        elevation: 0,
+        title: Center(child: Text("Student Result",style: TextStyle(color: Colors.black),)),
       ),
       body: Center(
         child: Column(

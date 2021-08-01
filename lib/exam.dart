@@ -32,16 +32,18 @@ class _ExamState extends State<Exam> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Center(child: Text("Student Result")),
-      // ),
+      backgroundColor: Colors.green,
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        elevation: 0,
+        title: Center(child: Text("Exam Routine",)),
+      ),
       body: Center(
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Column(
             children: [
               SizedBox(height: MediaQuery.of(context).size.height*0.2,),
-              Text("Exam Routine"),
               FutureBuilder(
                 future: _fetch(),
                 builder: (context,snapshot){

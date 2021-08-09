@@ -38,20 +38,8 @@ class _Teacher_InformationState extends State<Teacher_Information> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                // SizedBox(
-                //   height: MediaQuery.of(context).size.height * 0.05,
-                // ),
-                // Text(
-                //   "Teacher Sign Up Page",
-                //   style: TextStyle(
-                //       fontSize: 26,
-                //       color: Colors.black,
-                //       fontWeight: FontWeight.bold),
-                // ),
-                // SizedBox(
-                //   height: MediaQuery.of(context).size.height * 0.04,
-                // ),
-                Image(image: NetworkImage("https://cdn.pixabay.com/photo/2013/07/13/13/42/tux-161406__480.png",scale: 4)),
+                Image(image: AssetImage("assets/images/teacher_info.png"),
+                height: MediaQuery.of(context).size.height*0.15,),
                 SizedBox(height: MediaQuery.of(context).size.height*0.01,),
                 Text(
                   "Create your account",
@@ -113,7 +101,7 @@ class _Teacher_InformationState extends State<Teacher_Information> {
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     decoration:
-                    InputDecoration(hintText: "Time"),
+                    InputDecoration(hintText: "Cover Class Time"),
                     onChanged: (input){
                       setState(() {
                         _time=input;
@@ -143,7 +131,7 @@ class _Teacher_InformationState extends State<Teacher_Information> {
                   padding: const EdgeInsets.only(left: 25, right: 25),
                   child: TextFormField(
                     keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(hintText: "Day"),
+                    decoration: InputDecoration(hintText: "Cover Class Day"),
                     onChanged: (input){
                       setState(() {
                         _day=input;

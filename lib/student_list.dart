@@ -11,40 +11,36 @@ class _Student_ListState extends State<Student_List> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF0b1638),
       appBar: AppBar(
-        title: Center(child: Text("Students List")),
+        backgroundColor: Color(0xFF0b1638),
+        elevation: 0,
+        title: Center(child: Text("Students List",style: TextStyle(color: Colors.white),)),
       ),
       body: StreamBuilder(
-            stream: Firestore.instance.collection("student_information").snapshots(),
-              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot>snapshot){
-              if(!snapshot.hasData){
-                return Text("No value");
-              }
-              return ListView(
-                children: snapshot.data.documents.map((document){
-                  return Column(
+          stream: Firestore.instance.collection("student_information").snapshots(),
+          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot>snapshot){
+            if(!snapshot.hasData){
+              return Text("No value",style: TextStyle(color: Colors.white),);
+            }
+            return ListView(
+              children: snapshot.data.documents.map((document){
+                return Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Row(
                     children: [
-                      SizedBox(height: MediaQuery.of(context).size.height*0.01,),
-                      Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("\t Name: "+document['First_Name'] ?? "No Data Available"),
-                            Text("\t Class: "+document['Class'] ?? "No Data Available"),
-                            Text("\t Roll: "+document['Roll_No'] ?? "No Data Available"),
-                          ],
-
-                        ),
-                      ),
-                      SizedBox(height: MediaQuery.of(context).size.height*0.01,)
+                      //SizedBox(height: MediaQuery.of(context).size.height*0.01,),
+                      Text("\t Student Name: "+document['First_Name'] ?? "No Data Available",style: TextStyle(color: Colors.white)),
+                      Text("\t Class: "+document['Class'] ?? "No Data Available",style: TextStyle(color: Colors.white),),
+                      Text("\t Roll: "+document['Roll_No'] ?? "No Data Available",style: TextStyle(color: Colors.white),)
                     ],
-                  );
-                }).toList(),
-              );
-              }
-          ),
+                  ),
+                );
+              }).toList(),
+            );
+          }
+      ),
 
     );
   }
 }
-

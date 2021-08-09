@@ -42,7 +42,7 @@ class _Teacher_SignInState extends State<Teacher_SignIn> {
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: NetworkImage("https://cdn.pixabay.com/photo/2015/12/01/15/43/black-1072366__480.jpg"),
+                    image: AssetImage("assets/images/stu_up_background.png"),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -59,7 +59,8 @@ class _Teacher_SignInState extends State<Teacher_SignIn> {
                   //       color: Colors.white),
                   // ),
                   SizedBox(height: MediaQuery.of(context).size.height*0.01,),
-                  Image(image: NetworkImage("https://cdn.pixabay.com/photo/2016/04/01/11/11/boy-1300242__480.png",scale: 3)),
+                  Image(image: AssetImage("assets/images/teacher_in.png"),
+                  height: MediaQuery.of(context).size.height*0.2,),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.04,
                   ),

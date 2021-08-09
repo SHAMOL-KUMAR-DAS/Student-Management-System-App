@@ -18,17 +18,19 @@ class _CoverPageState extends State<CoverPage> {
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
               image: DecorationImage(
-              image: NetworkImage("https://cdn.pixabay.com/photo/2016/09/10/12/40/grass-1659054_1280.jpg"),
+              image: AssetImage("assets/images/background.png"),
+              //NetworkImage("https://cdn.pixabay.com/photo/2016/09/10/12/40/grass-1659054_1280.jpg"),
               fit: BoxFit.cover,
             ),
           ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: MediaQuery.of(context).size.height*0.01,),
-                Image(image: NetworkImage("https://cdn.pixabay.com/photo/2013/03/29/13/39/home-97609_1280.png",scale: 10),),
+                Image(image: AssetImage("assets/images/cover_logo.png"),
+                  height: MediaQuery.of(context).size.height*0.25,
+                  width: MediaQuery.of(context).size.width*0.25,),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.02,
+                  height: MediaQuery.of(context).size.height * 0.01,
                 ),
                 Card(
                   color: Colors.red,

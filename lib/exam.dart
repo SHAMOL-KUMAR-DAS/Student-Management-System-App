@@ -36,7 +36,7 @@ class _ExamState extends State<Exam> {
       appBar: AppBar(
         backgroundColor: Colors.green,
         elevation: 0,
-        title: Center(child: Text("Exam Routine",)),
+        title: Center(child: Text("Exam Routine",style: TextStyle(color: Colors.black),)),
       ),
       body: Center(
         child: SingleChildScrollView(

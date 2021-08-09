@@ -41,13 +41,14 @@ class _Student_SignUpState extends State<Student_SignUp> {
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: NetworkImage("https://cdn.pixabay.com/photo/2015/12/01/15/43/black-1072366__480.jpg"),
+                    image: AssetImage("assets/images/stu_up_background.png"),
                     fit: BoxFit.cover,
                   ),
                 ),
                 child: Column(
                   children: [
-                    Image(image: NetworkImage("https://cdn.pixabay.com/photo/2016/05/31/12/42/thumb-up-1426815_1280.png",scale: 8),),
+                    Image(image: AssetImage("assets/images/stu_up.png"),
+                        height: MediaQuery.of(context).size.height*0.2),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.035,
                     ),

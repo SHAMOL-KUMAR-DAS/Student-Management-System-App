@@ -50,7 +50,8 @@ class _Teacher_SignupState extends State<Teacher_Signup> {
                 child: Column(
                   children: [
                     SizedBox(height: MediaQuery.of(context).size.height*0.01,),
-                    Image(image: NetworkImage("https://cdn.pixabay.com/photo/2014/04/03/09/59/teacher-309533__480.png",scale: 3),),
+                    Image(image: AssetImage("assets/images/teacher_up.png"),
+                    height: MediaQuery.of(context).size.height*0.15,),
                     // SizedBox(
                     //   height: MediaQuery.of(context).size.height * 0.05,
                     // ),

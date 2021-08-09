@@ -37,23 +37,16 @@ class _Student_SignInState extends State<Student_SignIn> {
           key: _formkey,
             child: SingleChildScrollView(
               child: Center(
-                // child: Container(
-                //   height: MediaQuery.of(context).size.height,
-                //   width: MediaQuery.of(context).size.width,
-                  // decoration: BoxDecoration(
-                  //   image: DecorationImage(
-                  //     image: NetworkImage("https://cdn.pixabay.com/photo/2020/09/18/21/35/abstraction-5582994__480.jpg"),
-                  //     fit: BoxFit.cover,
-                  //   ),
-                  // ),
                 child: Column(
                   children: [
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.02,
                       //0xFFeb740c
                     ),
-                    Image(image: NetworkImage("https://cdn.pixabay.com/photo/2019/08/30/15/48/lock-4441691_1280.png",scale: 10)),
-                    SizedBox(height: MediaQuery.of(context).size.height*0.04,),
+                    Image(image: AssetImage("assets/images/stu_background.png"),
+                      height: MediaQuery.of(context).size.height*0.25,
+                    width: MediaQuery.of(context).size.width*0.25,),
+                    //SizedBox(height: MediaQuery.of(context).size.height*0.04,),
                     // Text(
                     //   "WELCOME TO SCHOOL MANAGEMENT SYSTEM",
                     //   style: TextStyle(
@@ -162,7 +155,7 @@ class _Student_SignInState extends State<Student_SignIn> {
                           borderRadius: BorderRadius.circular(15)
                         ),
                         onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Student_SignUp()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Student_SignUp()));
                         },
                         child: Text("SIGN UP"))
                   ],

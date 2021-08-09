@@ -13,12 +13,12 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     return SplashScreen(
       backgroundColor: Colors.lightGreenAccent,
-      image: Image(
-        image: AssetImage("images/school.jpg"),
-        height: 150,
-        width: 300,
-        fit: BoxFit.fill,
-      ),
+      // image: Image(
+      //   image: AssetImage("images/school.jpg"),
+      //   height: 150,
+      //   width: 300,
+      //   fit: BoxFit.fill,
+      // ),
       navigateAfterSeconds: CoverPage(),
       seconds: 3,
       loadingText: Text("School Management System"),

@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -14,36 +15,53 @@ class _Teacher_ListState extends State<Teacher_List> {
       appBar: AppBar(
         backgroundColor: Color(0xFFcffc03),
         elevation: 0,
-        title: Center(child: Text("Teachers List",style: TextStyle(color: Colors.black),)),
+        title: Center(
+          child: WavyAnimatedTextKit(
+            textStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 32
+            ),
+            text: ["Teachers List..."],
+            isRepeatingAnimation: false,
+          ),
+        ),
       ),
       body: StreamBuilder(
-          stream: Firestore.instance.collection("teacher_information").snapshots(),
-          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot>snapshot){
-            if(!snapshot.hasData){
+          stream:
+              Firestore.instance.collection("teacher_information").snapshots(),
+          builder:
+              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (!snapshot.hasData) {
               return Text("No value");
             }
             return ListView(
-              children: snapshot.data.documents.map((document){
+              children: snapshot.data.documents.map((document) {
                 return Padding(
                   padding: const EdgeInsets.all(10),
                   child: Column(
                     children: [
                       //SizedBox(height: MediaQuery.of(context).size.height*0.01,),
-                            Text("Teacher Name: "+document['Name'] ?? "No Data Available"),
-                            Text("Teacher ID: "+document['Teacher_ID'] ?? "No Data Available"),
-                            Text("Speciality: "+document['Special'] ?? "No Data Available"),
-                            Text("Contact No: "+document['Contact'] ?? "No Data Available"),
-                            Text("Cover Class: "+document['Day']+" at "+document['Time'] ?? "No Data Available"),
-                            //Text("Free T: "+document['Time'] ?? "No Data Available"),
+                      Text("Teacher Name: " + document['Name'] ??
+                          "No Data Available"),
+                      Text("Teacher ID: " + document['Teacher_ID'] ??
+                          "No Data Available"),
+                      Text("Speciality: " + document['Special'] ??
+                          "No Data Available"),
+                      Text("Contact No: " + document['Contact'] ??
+                          "No Data Available"),
+                      Text("Cover Class: " +
+                              document['Day'] +
+                              " at " +
+                              document['Time'] ??
+                          "No Data Available"),
+                      //Text("Free T: "+document['Time'] ?? "No Data Available"),
                       //SizedBox(height: MediaQuery.of(context).size.height*0.01,)
                     ],
                   ),
                 );
               }).toList(),
             );
-          }
-      ),
-
+          }),
     );
   }
 }

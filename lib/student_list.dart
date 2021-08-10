@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,7 +16,17 @@ class _Student_ListState extends State<Student_List> {
       appBar: AppBar(
         backgroundColor: Color(0xFF0b1638),
         elevation: 0,
-        title: Center(child: Text("Students List",style: TextStyle(color: Colors.white),)),
+        title: Center(
+          child: WavyAnimatedTextKit(
+            text: ["Students List..."],
+            textStyle: TextStyle(
+              //color: Colors.white
+              fontSize: 25,
+              fontFamily: "Popins",
+              fontWeight: FontWeight.w400
+            ),
+          ),
+        )
       ),
       body: StreamBuilder(
           stream: Firestore.instance.collection("student_information").snapshots(),

@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:school_management/student_signin.dart';
 import 'package:school_management/teacher_signin.dart';
@@ -47,13 +48,18 @@ class _CoverPageState extends State<CoverPage> {
                             onPressed: () {
                               Navigator.push(context, MaterialPageRoute(builder: (context)=>Teacher_SignIn()));
                             },
-                            child: Text(
-                              "Login as a Teacher",
-                              style: TextStyle(
-                                fontSize: 24,
+                            child: WavyAnimatedTextKit(
+                              textStyle: TextStyle(
+                                fontSize: 23,
                                 color: Colors.white,
+                                fontFamily: "Popins",
+                                fontWeight: FontWeight.w400
                               ),
-                            ))),
+                              text: ["Login as a Teacher"],
+                              isRepeatingAnimation: false,
+                            ),
+                        ),
+                    ),
                   ),
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height*0.04,),
@@ -72,13 +78,18 @@ class _CoverPageState extends State<CoverPage> {
                             onPressed: () {
                               Navigator.push(context, MaterialPageRoute(builder: (context)=>Student_SignIn()));
                             },
-                            child: Text(
-                              "Login as a Student",
-                              style: TextStyle(
-                                fontSize: 24,
+                            child: WavyAnimatedTextKit(
+                              textStyle: TextStyle(
+                                fontSize: 23,
                                 color: Colors.white,
+                                fontFamily: "Popins",
+                                fontWeight: FontWeight.w400
                               ),
-                            ))),
+                              text: ["Login as a Student"],
+                              isRepeatingAnimation: false,
+                            )
+                        ),
+                    ),
                   ),
                 ),
               ],

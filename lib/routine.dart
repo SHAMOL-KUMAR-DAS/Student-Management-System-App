@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -34,48 +35,57 @@ class _RoutineState extends State<Routine> {
     return Scaffold(
       backgroundColor: Color(0xFF272b28),
 
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Color(0xFF272b28),
-        title: Center(child: Text("Class Routine"))
-      ),
       body: Center(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: FutureBuilder(
-            future: _fetch(),
-            builder: (context,snapshot){
-              if(snapshot.connectionState!= ConnectionState.done)
-                return Text("No Data Available..",style: TextStyle(color: Colors.white),);
-              return DataTable(columns:[
-                DataColumn(label: Text("Day/Time",style: TextStyle(color: Colors.white),)),
-                DataColumn(label: Text("9-10 AM",style: TextStyle(color: Colors.white),)),
-                DataColumn(label: Text("10-11 AM",style: TextStyle(color: Colors.white),)),
-                DataColumn(label: Text("11AM-12PM",style: TextStyle(color: Colors.white),)),
-              ],
-                  rows: [
-                    DataRow(cells: [
-                      DataCell(Text("SaturDay",style: TextStyle(color: Colors.white),)),
-                      DataCell(Text("$_sub1\n$_teacher1",style: TextStyle(color: Colors.white),)),
-                      DataCell(Text("$_sub2\n$_teacher2",style: TextStyle(color: Colors.white),)),
-                      DataCell(Text("$_sub3\n$_teacher3",style: TextStyle(color: Colors.white),))
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text("SundaDay",style: TextStyle(color: Colors.white),)),
-                      DataCell(Text("$_sub3\n$_teacher3",style: TextStyle(color: Colors.white),)),
-                      DataCell(Text("$_sub1\n$_teacher1",style: TextStyle(color: Colors.white),)),
-                      DataCell(Text("$_sub2\n$_teacher2",style: TextStyle(color: Colors.white),))
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text("MonDay",style: TextStyle(color: Colors.white),)),
-                      DataCell(Text("$_sub2\n$_teacher2",style: TextStyle(color: Colors.white),)),
-                      DataCell(Text("$_sub3\n$_teacher3",style: TextStyle(color: Colors.white),)),
-                      DataCell(Text("$_sub1\n$_teacher1",style: TextStyle(color: Colors.white),))
-                    ])
-                  ]
-              );
-            },
-          ),
+        child: Column(
+          children: [
+            SizedBox(height: MediaQuery.of(context).size.height * 0.15,),
+            WavyAnimatedTextKit(
+              text: ["Class Routine..."],
+              textStyle: TextStyle(
+                fontSize: 32,
+                color: Colors.white,
+                fontWeight: FontWeight.w400
+              ),
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.1,),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: FutureBuilder(
+                future: _fetch(),
+                builder: (context,snapshot){
+                  if(snapshot.connectionState!= ConnectionState.done)
+                    return Text("No Data Available..",style: TextStyle(color: Colors.white),);
+                  return DataTable(columns:[
+                    DataColumn(label: Text("Day/Time",style: TextStyle(color: Colors.white),)),
+                    DataColumn(label: Text("9-10 AM",style: TextStyle(color: Colors.white),)),
+                    DataColumn(label: Text("10-11 AM",style: TextStyle(color: Colors.white),)),
+                    DataColumn(label: Text("11AM-12PM",style: TextStyle(color: Colors.white),)),
+                  ],
+                      rows: [
+                        DataRow(cells: [
+                          DataCell(Text("SaturDay",style: TextStyle(color: Colors.white),)),
+                          DataCell(Text("$_sub1\n$_teacher1",style: TextStyle(color: Colors.white),)),
+                          DataCell(Text("$_sub2\n$_teacher2",style: TextStyle(color: Colors.white),)),
+                          DataCell(Text("$_sub3\n$_teacher3",style: TextStyle(color: Colors.white),))
+                        ]),
+                        DataRow(cells: [
+                          DataCell(Text("SundaDay",style: TextStyle(color: Colors.white),)),
+                          DataCell(Text("$_sub3\n$_teacher3",style: TextStyle(color: Colors.white),)),
+                          DataCell(Text("$_sub1\n$_teacher1",style: TextStyle(color: Colors.white),)),
+                          DataCell(Text("$_sub2\n$_teacher2",style: TextStyle(color: Colors.white),))
+                        ]),
+                        DataRow(cells: [
+                          DataCell(Text("MonDay",style: TextStyle(color: Colors.white),)),
+                          DataCell(Text("$_sub2\n$_teacher2",style: TextStyle(color: Colors.white),)),
+                          DataCell(Text("$_sub3\n$_teacher3",style: TextStyle(color: Colors.white),)),
+                          DataCell(Text("$_sub1\n$_teacher1",style: TextStyle(color: Colors.white),))
+                        ])
+                      ]
+                  );
+                },
+              ),
+            ),
+          ],
         ),
           )
 

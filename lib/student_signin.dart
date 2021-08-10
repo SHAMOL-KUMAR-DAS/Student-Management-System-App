@@ -69,7 +69,9 @@ class _Student_SignInState extends State<Student_SignIn> {
                     // ),
                     Text(
                       "STUDENT LOGIN",
-                      style: TextStyle(fontSize: 16,),
+                      style: TextStyle(fontSize: 16,
+                      fontFamily: "Popins",
+                      fontWeight: FontWeight.w700),
                     ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * 0.035,

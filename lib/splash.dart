@@ -1,7 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:school_management/Student/information.dart';
 import 'package:school_management/coverpage.dart';
-import 'package:school_management/student_signin.dart';
+//import 'package:school_management/student_signin.dart';
 import 'package:splashscreen/splashscreen.dart';
+
+import 'Teacher/information.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -13,13 +17,19 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
     return SplashScreen(
       backgroundColor: Colors.lightGreenAccent,
-      // image: Image(
-      //   image: AssetImage("images/school.jpg"),
-      //   height: 150,
-      //   width: 300,
-      //   fit: BoxFit.fill,
-      // ),
-      navigateAfterSeconds: CoverPage(),
+      navigateAfterSeconds:
+      CoverPage(),
+      //Teacher_Information('Teacher'),
+      //Student_Information('',''),
+      // FutureBuilder(
+      //     future: FirebaseAuth.instance.currentUser(),
+      //     builder: (context, AsyncSnapshot<dynamic> snapshot){
+      //       if(snapshot.hasData){
+      //         return Homepage();
+      //       } else{
+      //         return CoverPage();
+      //       }
+      //     }),
       seconds: 3,
       loadingText: Text("School Management System"),
     );

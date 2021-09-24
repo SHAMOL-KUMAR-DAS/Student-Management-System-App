@@ -1,7 +1,8 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:school_management/student_signin.dart';
-import 'package:school_management/teacher_signin.dart';
+//import 'package:school_management/teacher_signin.dart';
+
+import 'Sign_In_Up/sign_in.dart';
 
 class CoverPage extends StatefulWidget {
   @override
@@ -46,7 +47,7 @@ class _CoverPageState extends State<CoverPage> {
                           height: MediaQuery.of(context).size.height,
                             minWidth: MediaQuery.of(context).size.width,
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Teacher_SignIn()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=> Sign_In('Teacher')));
                             },
                             child: WavyAnimatedTextKit(
                               textStyle: TextStyle(
@@ -56,7 +57,7 @@ class _CoverPageState extends State<CoverPage> {
                                 fontWeight: FontWeight.w400
                               ),
                               text: ["Login as a Teacher"],
-                              isRepeatingAnimation: false,
+                              isRepeatingAnimation: true,
                             ),
                         ),
                     ),
@@ -76,7 +77,7 @@ class _CoverPageState extends State<CoverPage> {
                           height: MediaQuery.of(context).size.height,
                             minWidth: MediaQuery.of(context).size.width,
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Student_SignIn()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Sign_In('Student')));
                             },
                             child: WavyAnimatedTextKit(
                               textStyle: TextStyle(
@@ -86,7 +87,7 @@ class _CoverPageState extends State<CoverPage> {
                                 fontWeight: FontWeight.w400
                               ),
                               text: ["Login as a Student"],
-                              isRepeatingAnimation: false,
+                              isRepeatingAnimation: true,
                             )
                         ),
                     ),

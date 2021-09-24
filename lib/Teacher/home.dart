@@ -3,30 +3,30 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Student_List extends StatefulWidget {
+class Teacher_Home extends StatefulWidget {
   @override
-  _Student_ListState createState() => _Student_ListState();
+  _Teacher_HomeState createState() => _Teacher_HomeState();
 }
-class _Student_ListState extends State<Student_List> {
+class _Teacher_HomeState extends State<Teacher_Home> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF0b1638),
       appBar: AppBar(
-        backgroundColor: Color(0xFF0b1638),
-        elevation: 0,
-        title: Center(
-          child: WavyAnimatedTextKit(
-            text: ["Students List..."],
-            textStyle: TextStyle(
-              //color: Colors.white
-              fontSize: 25,
-              fontFamily: "Popins",
-              fontWeight: FontWeight.w400
+          backgroundColor: Color(0xFF0b1638),
+          elevation: 0,
+          title: Center(
+            child: WavyAnimatedTextKit(
+              text: ["Students List..."],
+              textStyle: TextStyle(
+                //color: Colors.white
+                  fontSize: 25,
+                  fontFamily: "Popins",
+                  fontWeight: FontWeight.w400
+              ),
             ),
-          ),
-        )
+          )
       ),
       body: StreamBuilder(
           stream: Firestore.instance.collection("student_information").snapshots(),

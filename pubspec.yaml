@@ -31,8 +31,15 @@ dependencies:
   splashscreen: ^1.3.5
   firebase_auth: ^0.8.4+4
   cloud_firestore:
-  image_picker: ^0.6.7+4
   animated_text_kit: ^4.2.1
+  google_sign_in: ^5.1.0
+  random_string:
+  shared_preferences: ^2.0.7
+  flutter_signin_button: ^2.0.0
+  email_auth: ^0.0.1+4
+  image_picker: ^0.8.3+3
+  firebase_storage:
+  #firebase_phone_auth_handler: ^0.0.3
 
 dev_dependencies:
   flutter_test:

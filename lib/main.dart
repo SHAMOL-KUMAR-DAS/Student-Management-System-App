@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:school_management/coverpage.dart';
-import 'package:school_management/student_signin.dart';
-import 'package:school_management/student_information.dart';
 import 'package:school_management/splash.dart';
 
 void main() {
@@ -26,7 +24,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.red,
       ),
-      home: Splash(),
+      home:
+      Splash(),
         debugShowCheckedModeBanner: false,
     );
   }

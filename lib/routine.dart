@@ -22,8 +22,6 @@ class _RoutineState extends State<Routine> {
         _teacher2=ds.data["Teacher_2"];
         _sub3=ds.data["Subject_3"];
         _teacher3=ds.data["Teacher_3"];
-
-
       }).catchError((e){
         print(e);
       });

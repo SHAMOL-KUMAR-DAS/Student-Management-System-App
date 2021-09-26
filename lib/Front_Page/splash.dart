@@ -1,11 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:school_management/Student/information.dart';
-import 'package:school_management/coverpage.dart';
 //import 'package:school_management/student_signin.dart';
 import 'package:splashscreen/splashscreen.dart';
-
-import 'Teacher/information.dart';
+import 'cover.dart';
 
 class Splash extends StatefulWidget {
   @override

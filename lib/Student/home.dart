@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:school_management/coverpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:school_management/event.dart';
-import 'package:school_management/exam.dart';
-import 'package:school_management/result.dart';
-import 'package:school_management/routine.dart';
-import 'package:school_management/teacher_list.dart';
+import 'package:school_management/Events/notice.dart';
+import 'package:school_management/Events/exam.dart';
+import 'package:school_management/Events/result.dart';
+import 'package:school_management/Events/routine.dart';
+import 'package:school_management/Events/teacher_list.dart';
+import 'package:school_management/Front_Page/cover.dart';
+import 'package:school_management/Message/chat_page.dart';
+import 'package:school_management/Profile/student_profile.dart';
 
 class Student_Home extends StatefulWidget {
   String type;
@@ -51,19 +53,21 @@ class _Student_HomeState extends State<Student_Home> {
         elevation: 0,
         automaticallyImplyLeading: false,
         title: Center(
-            child: FutureBuilder(
-                future: _fetch(),
-                builder: (context, snapshot){
-                  if (snapshot.connectionState != ConnectionState.done)
-                    return Text('');
-                  return Text(fname + ' ' + lname);
-                })),
-        //actions: [
-        //   FlatButton(onPressed: (){
-        //     //Navigator.pop(context, MaterialPageRoute(builder: (context)=>CoverPage()));
-        //     Navigator.push(context, MaterialPageRoute(builder: (context)=>CoverPage()));
-        //   }, child: Icon(Icons.logout,color: Colors.white,)),
-        // ],
+          child: FutureBuilder(
+              future: _fetch(),
+              builder: (context, snapshot){
+                if (snapshot.connectionState != ConnectionState.done)
+                  return Text('');
+                return Text(fname + ' ' + lname);
+              }),
+        ),
+        actions: [
+          FlatButton(onPressed: (){
+            //Navigator.pop(context, MaterialPageRoute(builder: (context)=>CoverPage()));
+            //Navigator.push(context, MaterialPageRoute(builder: (context)=>CoverPage()));
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>CoverPage()), (route) => false);
+          }, child: Icon(Icons.logout,color: Colors.white,)),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -79,9 +83,14 @@ class _Student_HomeState extends State<Student_Home> {
             return Text("",style: TextStyle(color: Colors.white),);
           return Column(
             children: [
-              CircleAvatar(
-                radius: 90.0,
-                backgroundImage: NetworkImage(image),
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Student_Profile(image,fname,lname,clas,roll,add,gname,gnum,gmail)));
+                },
+                child: CircleAvatar(
+                  radius: 90.0,
+                  backgroundImage: NetworkImage(image),
+                ),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.01,
@@ -129,10 +138,10 @@ class _Student_HomeState extends State<Student_Home> {
                         minWidth: MediaQuery.of(context).size.width,
                         onPressed: () {
                           Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Exam()));
+                              MaterialPageRoute(builder: (context) => Chatting('', '', '', '', '', '')));
                         },
                         child: Text(
-                          "Exam Schedule",
+                          "Message",
                           style: TextStyle(fontSize: 18),
                         )),
                   ),

@@ -3,11 +3,10 @@ import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:school_management/Front_Page/cover.dart';
 import 'package:school_management/Sign_In_Up/sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import '../coverpage.dart';
 
 class Teacher_Information extends StatefulWidget {
   String type, email;

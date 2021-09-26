@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:school_management/coverpage.dart';
-import 'package:school_management/splash.dart';
+import 'Front_Page/splash.dart';
 
 void main() {
   runApp(MyApp());

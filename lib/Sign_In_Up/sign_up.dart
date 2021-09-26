@@ -217,46 +217,8 @@ class _Sign_upState extends State<Sign_up> {
                     );
                     //}
                   });
-                // }
-                // else if (_password.length < 6) {
-                //   showDialog(context: context, builder: (BuildContext context) {
-                //     return new AlertDialog(
-                //       title: new Text("Your Password is too Short"),
-                //       content: Text('Please Enter Password more than 5'),
-                //     );
-                //   }
-                //   );
-                // }
-                // else if (_password != _repassword) {
-                //   showDialog(context: context, builder: (BuildContext context) {
-                //     return new AlertDialog(
-                //       title: new Text("Please Enter Same Password"),
-                //     );
-                //   }
-                //   );
-                //
-                // }
               },
               codeAutoRetrievalTimeout: (verificationId) {});
-
-        // else if (_password.length < 6) {
-        //   showDialog(context: context, builder: (BuildContext context) {
-        //     return new AlertDialog(
-        //       title: new Text("Your Password is too Short"),
-        //       content: Text('Please Enter Password more than 5'),
-        //     );
-        //   }
-        //   );
-        // }
-        // else if (_password != _repassword) {
-        //   showDialog(context: context, builder: (BuildContext context) {
-        //     return new AlertDialog(
-        //       title: new Text("Please Enter Same Password"),
-        //     );
-        //   }
-        //   );
-        //
-        // }
       }
   }
 
@@ -408,7 +370,6 @@ class _Sign_upState extends State<Sign_up> {
                     //   }
                     //   );
                     // }
-
                   },
                 ),
               ],

@@ -7,6 +7,7 @@ import 'package:school_management/Events/result.dart';
 import 'package:school_management/Events/routine.dart';
 import 'package:school_management/Events/teacher_list.dart';
 import 'package:school_management/Front_Page/cover.dart';
+import 'package:school_management/Message/all_user_student.dart';
 import 'package:school_management/Message/chat_page.dart';
 import 'package:school_management/Profile/student_profile.dart';
 
@@ -89,7 +90,7 @@ class _Student_HomeState extends State<Student_Home> {
                 },
                 child: CircleAvatar(
                   radius: 90.0,
-                  backgroundImage: NetworkImage(image),
+                  backgroundImage: image != null ? NetworkImage(image) : AssetImage('assets/images/teacher_in.png'),
                 ),
               ),
               SizedBox(
@@ -138,7 +139,7 @@ class _Student_HomeState extends State<Student_Home> {
                         minWidth: MediaQuery.of(context).size.width,
                         onPressed: () {
                           Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Chatting('', '', '', '', '', '')));
+                              MaterialPageRoute(builder: (context) => All_Users_Student(widget.type, image, clas)));
                         },
                         child: Text(
                           "Message",
@@ -193,7 +194,7 @@ class _Student_HomeState extends State<Student_Home> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Teacher_List()));
+                                builder: (context) => Teacher_List('')));
                       },
                       child: Text(
                         "Teacher Info",

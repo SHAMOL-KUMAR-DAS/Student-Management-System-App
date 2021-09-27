@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:school_management/Profile/teacher_profile.dart';
 
 class Teacher_List extends StatefulWidget {
+  String userEmail;
+  Teacher_List(this.userEmail);
   @override
   _Teacher_ListState createState() => _Teacher_ListState();
 }
@@ -38,44 +40,54 @@ class _Teacher_ListState extends State<Teacher_List> {
             }
             return ListView(
               children: snapshot.data.documents.map((document) {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: FlatButton(
-                    onPressed: (){
-                      String teacher_uid = document.documentID;
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Teacher_Profile(teacher_uid)));
-                    },
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 18,
-                          backgroundImage: NetworkImage(document['Image']),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Text(document['Name'],style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white
-                          ),),
-                        ),
-                        // Text("Teacher ID: " + document['Teacher_ID'] ??
-                        //     "No Data Available"),
-                        // Text("Speciality: " + document['Special'] ??
-                        //     "No Data Available"),
-                        // Text("Contact No: " + document['Contact'] ??
-                        //     "No Data Available"),
-                        // Text("Cover Class: " +
-                        //         document['Day'] +
-                        //         " at " +
-                        //         document['Time'] ??
-                        //     "No Data Available"),
-                        //Text("Free T: "+document['Time'] ?? "No Data Available"),
-                        //SizedBox(height: MediaQuery.of(context).size.height*0.01,)
-                      ],
+                if (widget.userEmail == document['E-Mail']) {
+                  return Container(
+                    height: 0,
+                    width: 0,
+                  );
+                }
+                else {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: FlatButton(
+                      onPressed: () {
+                        String teacher_uid = document.documentID;
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) =>
+                                Teacher_Profile(teacher_uid)));
+                      },
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 18,
+                            backgroundImage: NetworkImage(document['Image']),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Text(document['Name'], style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white
+                            ),),
+                          ),
+                          // Text("Teacher ID: " + document['Teacher_ID'] ??
+                          //     "No Data Available"),
+                          // Text("Speciality: " + document['Special'] ??
+                          //     "No Data Available"),
+                          // Text("Contact No: " + document['Contact'] ??
+                          //     "No Data Available"),
+                          // Text("Cover Class: " +
+                          //         document['Day'] +
+                          //         " at " +
+                          //         document['Time'] ??
+                          //     "No Data Available"),
+                          //Text("Free T: "+document['Time'] ?? "No Data Available"),
+                          //SizedBox(height: MediaQuery.of(context).size.height*0.01,)
+                        ],
+                      ),
                     ),
-                  ),
-                );
+                  );
+                }
               }).toList(),
             );
           }),

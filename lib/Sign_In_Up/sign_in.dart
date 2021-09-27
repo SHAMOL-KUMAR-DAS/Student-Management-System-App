@@ -29,7 +29,7 @@ class _Sign_InState extends State<Sign_In> {
           Navigator.push(context, MaterialPageRoute(builder: (context)=>Student_Home(widget.type)));
           }
           else if(widget.type == 'Teacher'){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>Teacher_Home(user.uid, user.email)));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Teacher_Home(user.uid, user.email, widget.type)));
           }
           else{
             showDialog(context: context, builder: (BuildContext context){

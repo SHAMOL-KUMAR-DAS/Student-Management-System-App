@@ -54,7 +54,7 @@ class _CoverPageState extends State<CoverPage> {
                                   fontFamily: "Popins",
                                   fontWeight: FontWeight.w400
                               ),
-                              text: ["Login as a Teacher"],
+                              text: ["Teacher Account"],
                               isRepeatingAnimation: true,
                             ),
                           ),
@@ -84,7 +84,7 @@ class _CoverPageState extends State<CoverPage> {
                                     fontFamily: "Popins",
                                     fontWeight: FontWeight.w400
                                 ),
-                                text: ["Login as a Student"],
+                                text: ["Student Account"],
                                 isRepeatingAnimation: true,
                               )
                           ),

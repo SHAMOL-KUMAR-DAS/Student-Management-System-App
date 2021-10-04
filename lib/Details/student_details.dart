@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:school_management/Message/chat_page.dart';
+import 'package:school_management/Teacher/teacher_result.dart';
 
 class Student_Details extends StatefulWidget {
   String student_uid, userUid, userEmail;
@@ -101,9 +102,9 @@ class _Student_DetailsState extends State<Student_Details> {
                             child: FlatButton(
                                 height: MediaQuery.of(context).size.height,
                                 minWidth: MediaQuery.of(context).size.width,
-                                // onPressed: () {
-                                //   Navigator.push(context, MaterialPageRoute(builder: (context)=>Student_List('2')));
-                                // },
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Teacher_Result(widget.student_uid,image,fname,lname,roll,clas)));
+                                },
                                 child: Text(
                                   "Result",
                                   style: TextStyle(fontSize: 20),
@@ -125,8 +126,8 @@ class _Student_DetailsState extends State<Student_Details> {
                               minWidth: MediaQuery.of(context).size.width,
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Chatting(widget.userUid,fname,lname, widget.student_uid, widget.userEmail, gmail)));
-                                print('User : ${widget.userUid}');
-                                print(widget.student_uid);
+                                // print('User : ${widget.userUid}');
+                                // print(widget.student_uid);
                               },
                               child: Text(
                                 "Message",

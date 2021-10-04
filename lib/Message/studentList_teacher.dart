@@ -46,9 +46,9 @@ class _StudentList_TeacherState extends State<StudentList_Teacher> {
             )),
         title: Center(
             child: Text(
-              'Messaging',
-              style: TextStyle(fontSize: 25),
-            )),
+          'Messaging',
+          style: TextStyle(fontSize: 25),
+        )),
       ),
       body: Column(
         children: [
@@ -56,8 +56,12 @@ class _StudentList_TeacherState extends State<StudentList_Teacher> {
             children: [
               Expanded(
                 child: FlatButton(
-                  onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>All_Users_Teacher(widget.type, widget.image)));
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                All_Users_Teacher(widget.type, widget.image)));
                   },
                   child: Text('All'),
                 ),
@@ -65,26 +69,25 @@ class _StudentList_TeacherState extends State<StudentList_Teacher> {
               Expanded(
                 child: FlatButton(
                   color: Colors.black26,
-                  onPressed: (){
-
-                  },
+                  onPressed: () {},
                   child: Text('Student'),
                 ),
               ),
               Expanded(
                   child: FlatButton(
-                    onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Teacher_Teacher(widget.type, widget.image, '')));
-                    },
-
-                    child: Text('Teacher'),
-                  ))
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              Teacher_Teacher(widget.type, widget.image, '')));
+                },
+                child: Text('Teacher'),
+              ))
             ],
           ),
           StreamBuilder(
-              stream: Firestore.instance
-                  .collection('Student')
-                  .snapshots(),
+              stream: Firestore.instance.collection('Student').snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (!snapshot.hasData) {
@@ -106,75 +109,81 @@ class _StudentList_TeacherState extends State<StudentList_Teacher> {
                         //     width: 0,
                         //   );
                         // } else {
-                          //print(document['E-Mail']);
-                          return Container(
-                            height: MediaQuery.of(context).size.height * 0.07,
-                            width: MediaQuery.of(context).size.width,
-                            //color: Colors.red,
-                            child: ListTile(
-                              title: GestureDetector(
-                                onTap: () {
-                                  String userid = document.documentID;
-                                  //print(user.uid);
-                                  //if(document[''])
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Chatting(
-                                              user.uid,
-                                              document['First_Name'],
-                                              document['Last_Name'],
-                                              userid,
-                                              user.email,
-                                              document['E-Mail'])));
-                                },
-                                child: Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 5),
-                                      child: CircleAvatar(
+                        //print(document['E-Mail']);
+                        return Container(
+                          height: MediaQuery.of(context).size.height * 0.07,
+                          width: MediaQuery.of(context).size.width,
+                          //color: Colors.red,
+                          child: ListTile(
+                            title: GestureDetector(
+                              onTap: () {
+                                String userid = document.documentID;
+                                //print(user.uid);
+                                //if(document[''])
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Chatting(
+                                            user.uid,
+                                            document['First_Name'],
+                                            document['Last_Name'],
+                                            userid,
+                                            user.email,
+                                            document['E-Mail'])));
+                              },
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 5),
+                                    child: CircleAvatar(
                                         radius: 10,
-                                          backgroundColor: Color(0xFF4f4e4a),
-                                          child: Text(document['Class'] ?? '',style: TextStyle(fontSize: 15),)),
-                                    ),
-                                    CircleAvatar(
-                                      radius: 20.0,
-                                      backgroundImage:
-                                      NetworkImage(document['Image'] ?? ""),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      document['First_Name'] ?? '',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      document['Last_Name'] ?? '',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 5),
-                                      child: CircleAvatar(
+                                        backgroundColor: Color(0xFF4f4e4a),
+                                        child: Text(
+                                          document['Class'] ?? '',
+                                          style: TextStyle(fontSize: 15),
+                                        )),
+                                  ),
+                                  CircleAvatar(
+                                    radius: 20.0,
+                                    backgroundImage:
+                                        NetworkImage(document['Image'] ?? ""),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    document['First_Name'] ?? '',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    document['Last_Name'] ?? '',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 5),
+                                    child: CircleAvatar(
                                         radius: 10,
-                                          backgroundColor: Color(0xFF4f4e4a),
-                                          child: Text(document['Roll'] ?? '',style: TextStyle(fontSize: 10),)),
-                                    )
-                                    //Text(widget.type)
-                                  ],
-                                ),
+                                        backgroundColor: Color(0xFF4f4e4a),
+                                        child: Text(
+                                          document['Roll'] ?? '',
+                                          style: TextStyle(fontSize: 10),
+                                        )),
+                                  )
+                                  //Text(widget.type)
+                                ],
                               ),
                             ),
-                          );
+                          ),
+                        );
                         //}
                       }).toList());
                 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:school_management/Events/notice.dart';
+import 'package:school_management/Student/student_notice.dart';
+import 'package:school_management/Teacher/teacher_notice.dart';
 import 'package:school_management/Events/exam.dart';
 import 'package:school_management/Events/result.dart';
 import 'package:school_management/Events/routine.dart';
@@ -164,7 +165,7 @@ class _Student_HomeState extends State<Student_Home> {
                         minWidth: MediaQuery.of(context).size.width,
                         onPressed: () {
                           Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Event()));
+                              MaterialPageRoute(builder: (context) => Student_Notice(widget.type)));
                         },
                         child: Text(
                           "Notice Board",

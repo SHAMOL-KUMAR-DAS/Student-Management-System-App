@@ -2,6 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:school_management/Teacher/teacher_notice.dart';
 import 'package:school_management/Events/student_list_all.dart';
 import 'package:school_management/Events/student_list_class.dart';
 import 'package:school_management/Events/teacher_list.dart';
@@ -192,7 +193,7 @@ class _Teacher_HomeState extends State<Teacher_Home> {
                           height: MediaQuery.of(context).size.height,
                           minWidth: MediaQuery.of(context).size.width,
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Student_List('4', widget.userUid, widget.userEmail)));
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Teacher_Notice(widget.type)));
                           },
                           child: Text(
                             "Notice",

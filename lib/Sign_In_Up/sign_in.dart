@@ -28,7 +28,7 @@ class _Sign_InState extends State<Sign_In> {
           if (widget.type == 'Student'){
           Navigator.push(context, MaterialPageRoute(builder: (context)=>Student_Home(widget.type)));
           }
-          else if(widget.type == 'Teacher'){
+          else if(widget.type == 'Teacher' && _emailController.text.endsWith('teacher.com')){
             Navigator.push(context, MaterialPageRoute(builder: (context)=>Teacher_Home(user.uid, user.email, widget.type)));
           }
           else{

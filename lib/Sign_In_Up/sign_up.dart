@@ -22,53 +22,53 @@ class _Sign_upState extends State<Sign_up> {
   final TextEditingController _pinController = TextEditingController();
   final TextEditingController _otpController = TextEditingController();
 
-  void sendOTP() async {
-    EmailAuth.sessionName = 'Excel IT AI Student Management';
-    var res = await EmailAuth.sendOtp(receiverMail: _inputController.text);
-    if(res){
-      print('Sent OTP Successfully');
-    }
-    else{
-      showDialog(context: context, builder: (BuildContext context) {
-        return new AlertDialog(
-          title: new Text("Please Enter Valid E-Mail"),
-        );
-      }
-      );
-    }
-  }
+  // void sendOTP() async {
+  //   EmailAuth.sessionName = 'Excel IT AI Student Management';
+  //   var res = await EmailAuth.sendOtp(receiverMail: _inputController.text);
+  //   if(res){
+  //     print('Sent OTP Successfully');
+  //   }
+  //   else{
+  //     showDialog(context: context, builder: (BuildContext context) {
+  //       return new AlertDialog(
+  //         title: new Text("Please Enter Valid E-Mail"),
+  //       );
+  //     }
+  //     );
+  //   }
+  // }
 
-  void verifyOTP()async{
-    var res = EmailAuth.validate(receiverMail: _inputController.text, userOTP: _otpController.text);
-    if(res){
-      print('Sent OTP ${_inputController.text}');
-      if(widget.type == 'Student') {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => Student_Information(widget.type,_inputController.text)));
-      }
-      else if(widget.type == 'Teacher'){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>Teacher_Information(widget.type, _inputController.text)));
-      }
-    }
-    else{
-      showDialog(context: context, builder: (BuildContext context) {
-        return new AlertDialog(
-          title: new Text("Invalid OTP"),
-          content: Row(
-            children: [
-              new Text("Please Type Valid OTP"),
-              FlatButton(
-                  onPressed: (){
-                    Navigator.pop(context);
-                  },
-                  child: Text('Ok'))
-            ],
-          ),
-        );
-      }
-      );
-    }
-  }
+  // void verifyOTP()async{
+  //   var res = EmailAuth.validate(receiverMail: _inputController.text, userOTP: _otpController.text);
+  //   if(res){
+  //     print('Sent OTP ${_inputController.text}');
+  //     if(widget.type == 'Student') {
+  //       Navigator.push(context,
+  //           MaterialPageRoute(builder: (context) => Student_Information(widget.type,_inputController.text)));
+  //     }
+  //     else if(widget.type == 'Teacher'){
+  //       Navigator.push(context, MaterialPageRoute(builder: (context)=>Teacher_Information(widget.type, _inputController.text)));
+  //     }
+  //   }
+  //   else{
+  //     showDialog(context: context, builder: (BuildContext context) {
+  //       return new AlertDialog(
+  //         title: new Text("Invalid OTP"),
+  //         content: Row(
+  //           children: [
+  //             new Text("Please Type Valid OTP"),
+  //             FlatButton(
+  //                 onPressed: (){
+  //                   Navigator.pop(context);
+  //                 },
+  //                 child: Text('Ok'))
+  //           ],
+  //         ),
+  //       );
+  //     }
+  //     );
+  //   }
+  // }
 
   final GlobalKey<FormState> _cformkey=GlobalKey<FormState>();
   Future<void> Sign_Up()async {
@@ -82,35 +82,49 @@ class _Sign_upState extends State<Sign_up> {
               FirebaseUser newuser = await _auth
                   .createUserWithEmailAndPassword(
                   email: _inputController.text, password: _password);
-              sendOTP();
-              showDialog(
-                  context: context, builder: (BuildContext context) {
-                return AlertDialog(
-                  //title: Text(''),
-                  content: Column(
-                    children: [
-                      TextFormField(
-                        keyboardType: TextInputType.number,
-                        controller: _otpController,
-                        decoration: InputDecoration(
-                            hintText: "Type Your 6 digit OTP",
-                            labelText: 'OTP'
-                        ),
-                      ),
-                      SizedBox(height: MediaQuery
-                          .of(context)
-                          .size
-                          .height * 0.04,),
-                      FlatButton(
-                          color: Colors.red,
-                          onPressed: () {
-                            verifyOTP();
-                          },
-                          child: Text('OTP Verification'))
-                    ],
-                  ),
-                );
-              });
+
+              if (widget.type == 'Student') {
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (context) =>
+                        Student_Information(widget.type,
+                            _inputController.text)));
+              }
+              else if (widget.type == 'Teacher') {
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (context) =>
+                        Teacher_Information(widget.type,
+                            _inputController.text)));
+              }
+              //sendOTP();
+              // showDialog(
+              //     context: context, builder: (BuildContext context) {
+              //   return AlertDialog(
+              //     //title: Text(''),
+              //     content: Column(
+              //       children: [
+              //         TextFormField(
+              //           keyboardType: TextInputType.number,
+              //           controller: _otpController,
+              //           decoration: InputDecoration(
+              //               hintText: "Type Your 6 digit OTP",
+              //               labelText: 'OTP'
+              //           ),
+              //         ),
+              //         SizedBox(height: MediaQuery
+              //             .of(context)
+              //             .size
+              //             .height * 0.04,),
+              //         FlatButton(
+              //             color: Colors.red,
+              //             onPressed: () {
+              //               //verifyOTP();
+              //
+              //             },
+              //             child: Text('OTP Verification'))
+              //       ],
+              //     ),
+              //   );
+              // });
             }
             else if (_password.length < 6) {
               showDialog(context: context, builder: (BuildContext context) {
@@ -322,54 +336,6 @@ class _Sign_upState extends State<Sign_up> {
                   child: Text("Create Account"),
                   onPressed: (){
                       Sign_Up();
-                      // if (_password.length >= 6 && _password == _repassword) {
-                      //   sendOTP();}
-                    //   showDialog(
-                    //       context: context, builder: (BuildContext context) {
-                    //     return AlertDialog(
-                    //       //title: Text(''),
-                    //       content: Column(
-                    //         children: [
-                    //           TextFormField(
-                    //             keyboardType: TextInputType.number,
-                    //             controller: _otpController,
-                    //             decoration: InputDecoration(
-                    //                 hintText: "Type Your 6 digit OTP",
-                    //                 labelText: 'OTP'
-                    //             ),
-                    //           ),
-                    //           SizedBox(height: MediaQuery
-                    //               .of(context)
-                    //               .size
-                    //               .height * 0.04,),
-                    //           FlatButton(
-                    //               color: Colors.red,
-                    //               onPressed: () {
-                    //                 verifyOTP();
-                    //               },
-                    //               child: Text('OTP Verification'))
-                    //         ],
-                    //       ),
-                    //     );
-                    //   });
-                    //   }
-                    //   else if (_password.length < 6) {
-                    //     showDialog(context: context, builder: (BuildContext context) {
-                    //       return new AlertDialog(
-                    //         title: new Text("Your Password is too Short"),
-                    //         content: Text('Please Enter Password more than 5'),
-                    //       );
-                    //     }
-                    //     );
-                    //   }
-                    // else if (_password != _repassword) {
-                    //   showDialog(context: context, builder: (BuildContext context) {
-                    //     return new AlertDialog(
-                    //       title: new Text("Please Enter Same Password"),
-                    //     );
-                    //   }
-                    //   );
-                    // }
                   },
                 ),
               ],

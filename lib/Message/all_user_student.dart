@@ -81,6 +81,7 @@ class _All_Users_StudentState extends State<All_Users_Student> {
               stream: Firestore.instance
                   .collection('Student')
                   .where('Class', isEqualTo: '${widget.clas}')
+              //.orderBy('messageTime',descending: false)
                   .snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {

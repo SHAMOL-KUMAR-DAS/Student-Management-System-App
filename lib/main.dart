@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:school_management/Provider/image_get.dart';
 import 'Front_Page/splash.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_)=> Get_Class()),
+          //another_one for another class
+        ],
+          child: MyApp()
+      ));
 }
 
 class MyApp extends StatelessWidget {
@@ -23,9 +32,9 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.red,
       ),
-      home:
-      Splash(),
-        debugShowCheckedModeBanner: false,
+      home: Splash(),
+      //home: Image_Design(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

@@ -5,7 +5,9 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:school_management/Front_Page/cover.dart';
+import 'package:school_management/Provider/image_get.dart';
 import 'package:school_management/Sign_In_Up/sign_in.dart';
 
 class Student_Information extends StatefulWidget {
@@ -71,6 +73,8 @@ class _Student_InformationState extends State<Student_Information> {
 
   @override
   Widget build(BuildContext context) {
+    //final _get_image = Provider.of<Get_Class>(context, listen: true);
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color(0xFFe9f518),
@@ -123,7 +127,7 @@ class _Student_InformationState extends State<Student_Information> {
                         galleryImage();
                       },
                       child: Icon(Icons.photo_library_outlined,
-                      //    color: Color(0xFFe37c22)
+                        //    color: Color(0xFFe37c22)
                         color: Colors.black,
                       ),
                     )
@@ -247,30 +251,30 @@ class _Student_InformationState extends State<Student_Information> {
                     color: Colors.black,
                     minWidth: MediaQuery.of(context).size.width * 0.8,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15)
+                        borderRadius: BorderRadius.circular(15)
                     ),
                     onPressed: () {
                       sendDataStudent();
                       if(_image == null){
-                      showDialog(context: context, builder: (BuildContext context){
-                      return AlertDialog(
-                      title: Text('Please Pick Your Image'),
-                      );
-                      });
+                        showDialog(context: context, builder: (BuildContext context){
+                          return AlertDialog(
+                            title: Text('Please Pick Your Image'),
+                          );
+                        });
                       }
                       else if(_fname == null){
-                      showDialog(context: context, builder: (BuildContext context){
-                      return AlertDialog(
-                      title: Text('Please Enter your First Name'),
-                      );
-                      });
+                        showDialog(context: context, builder: (BuildContext context){
+                          return AlertDialog(
+                            title: Text('Please Enter your First Name'),
+                          );
+                        });
                       }
                       else if(_lname == null){
-                      showDialog(context: context, builder: (BuildContext context){
-                      return AlertDialog(
-                      title: Text('Please Enter Your Last Name'),
-                      );
-                      });
+                        showDialog(context: context, builder: (BuildContext context){
+                          return AlertDialog(
+                            title: Text('Please Enter Your Last Name'),
+                          );
+                        });
                       }
                       else if(_class == null){
                         showDialog(context: context, builder: (BuildContext context){
@@ -280,39 +284,39 @@ class _Student_InformationState extends State<Student_Information> {
                         });
                       }
                       else if(_roll == null){
-                      showDialog(context: context, builder: (BuildContext context){
-                      return AlertDialog(
-                      title: Text('Please Enter Your Roll No'),
-                      );
-                      });
+                        showDialog(context: context, builder: (BuildContext context){
+                          return AlertDialog(
+                            title: Text('Please Enter Your Roll No'),
+                          );
+                        });
                       }
                       else if(_add == null){
-                      showDialog(context: context, builder: (BuildContext context){
-                      return AlertDialog(
-                      title: Text('Please Enter Your Present Address'),
-                      );
-                      });
+                        showDialog(context: context, builder: (BuildContext context){
+                          return AlertDialog(
+                            title: Text('Please Enter Your Present Address'),
+                          );
+                        });
                       }
                       else if(_g_name == null){
-                      showDialog(context: context, builder: (BuildContext context){
-                      return AlertDialog(
-                      title: Text('Please Enter Your Guardian Name'),
-                      );
-                      });
+                        showDialog(context: context, builder: (BuildContext context){
+                          return AlertDialog(
+                            title: Text('Please Enter Your Guardian Name'),
+                          );
+                        });
                       }
                       else if(_g_num == null || _g_num.length !=11){
-                      showDialog(context: context, builder: (BuildContext context){
-                      return AlertDialog(
-                      title: Text('Please Enter Your Guardian Contact Number'),
-                      );
-                      });
+                        showDialog(context: context, builder: (BuildContext context){
+                          return AlertDialog(
+                            title: Text('Please Enter Your Guardian Contact Number'),
+                          );
+                        });
                       }
                       else if(_class == null){
-                      showDialog(context: context, builder: (BuildContext context){
-                      return AlertDialog(
-                      title: Text('Please Enter Your Class'),
-                      );
-                      });
+                        showDialog(context: context, builder: (BuildContext context){
+                          return AlertDialog(
+                            title: Text('Please Enter Your Class'),
+                          );
+                        });
                       }
                       // if (_image != null && _fname != null && _lname != null && _class !=null && _roll != null
                       //     && _add != null && _g_name != null && _g_num != null && _g_num.length == 11){
@@ -322,8 +326,8 @@ class _Student_InformationState extends State<Student_Information> {
                       //Navigator.push(context, MaterialPageRoute(builder: (context)=>Student_SignIn()));
                     },
                     child: Text("Save Information",style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white
+                        fontSize: 20,
+                        color: Colors.white
                     ),))
               ],
             ),

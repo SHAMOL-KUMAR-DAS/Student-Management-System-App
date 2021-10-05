@@ -97,7 +97,7 @@ class _Sign_InState extends State<Sign_In> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.025,
               ),
-              Image(image: AssetImage('assets/images/stu_background.png'),height: 180,),
+              Image(image: AssetImage('assets/images/cover_logo.png'),height: 180,),
               // if (widget.type == 'Teacher')...[
               //   _Teacher_Sign_In()
               // ]

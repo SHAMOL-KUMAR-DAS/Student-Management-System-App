@@ -226,7 +226,7 @@ class _Student_HomeState extends State<Student_Home> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Result()));
+                                  builder: (context) => StudentResult(fname, lname, clas, roll)));
                         },
                         child: Text(
                           "Result",

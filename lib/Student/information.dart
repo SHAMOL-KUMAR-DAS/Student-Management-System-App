@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:school_management/Config/button_config.dart';
+import 'package:school_management/Config/color_config.dart';
 import 'package:school_management/Front_Page/cover.dart';
 import 'package:school_management/Provider/image_get.dart';
 import 'package:school_management/Sign_In_Up/sign_in.dart';
@@ -19,7 +21,14 @@ class Student_Information extends StatefulWidget {
 
 class _Student_InformationState extends State<Student_Information> {
 
-  String _fname,_lname,_roll,_add,_g_name,_g_num,_class;
+  var fname = TextEditingController();
+  var lname = TextEditingController();
+  var roll = TextEditingController();
+  var add = TextEditingController();
+  var gName = TextEditingController();
+  var gNum = TextEditingController();
+  var clas = TextEditingController();
+
   Firestore firestore = Firestore.instance;
 
   Future<void> sendDataStudent()async{
@@ -28,21 +37,84 @@ class _Student_InformationState extends State<Student_Information> {
     String imgurl = await (await put.onComplete).ref.getDownloadURL();
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     await (imgurl);
-    if (_image != null && _fname != null && _lname != null && _class !=null && _roll != null
-        && _add != null && _g_name != null && _g_num != null && _g_num.length == 11) {
+    if (_image != null && fname.text != null && lname.text != null && clas.text !=null && roll.text != null
+        && add.text != null && gNum.text != null && gName.text != null && gNum.text.length == 11) {
       firestore.collection(widget.type).document(user.uid).setData({
-        'First_Name': _fname,
-        'Last_Name': _lname,
+        'First_Name': fname.text,
+        'Last_Name': lname.text,
         'E-Mail': widget.email,
-        'Roll': _roll,
-        'Address': _add,
-        'Guardian_Name': _g_name,
-        'Guardian_Number': _g_num,
-        'Class': _class,
+        'Roll': roll.text,
+        'Address': add.text,
+        'Guardian_Name': gName.text,
+        'Guardian_Number': gNum.text,
+        'Class': clas.text,
         'Image': imgurl
       });
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => CoverPage()));
+    }
+    else if(_image == null){
+      showDialog(context: context, builder: (BuildContext context){
+        return AlertDialog(
+          title: Text('Please Pick Your Image'),
+        );
+      });
+    }
+    else if(fname.text == null){
+      showDialog(context: context, builder: (BuildContext context){
+        return AlertDialog(
+          title: Text('Please Enter your First Name'),
+        );
+      });
+    }
+    else if(lname.text == null){
+      showDialog(context: context, builder: (BuildContext context){
+        return AlertDialog(
+          title: Text('Please Enter Your Last Name'),
+        );
+      });
+    }
+    else if(clas.text == null){
+      showDialog(context: context, builder: (BuildContext context){
+        return AlertDialog(
+          title: Text('Please Enter Your Class'),
+        );
+      });
+    }
+    else if(roll.text == null){
+      showDialog(context: context, builder: (BuildContext context){
+        return AlertDialog(
+          title: Text('Please Enter Your Roll No'),
+        );
+      });
+    }
+    else if(add.text == null){
+      showDialog(context: context, builder: (BuildContext context){
+        return AlertDialog(
+          title: Text('Please Enter Your Present Address'),
+        );
+      });
+    }
+    else if(gName.text == null){
+      showDialog(context: context, builder: (BuildContext context){
+        return AlertDialog(
+          title: Text('Please Enter Your Guardian Name'),
+        );
+      });
+    }
+    else if(gNum.text == null || gNum.text.length !=11){
+      showDialog(context: context, builder: (BuildContext context){
+        return AlertDialog(
+          title: Text('Please Enter Your Guardian Contact Number'),
+        );
+      });
+    }
+    else if(clas.text == null){
+      showDialog(context: context, builder: (BuildContext context){
+        return AlertDialog(
+          title: Text('Please Enter Your Class'),
+        );
+      });
     }
   }
 
@@ -73,13 +145,11 @@ class _Student_InformationState extends State<Student_Information> {
 
   @override
   Widget build(BuildContext context) {
-    //final _get_image = Provider.of<Get_Class>(context, listen: true);
-
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xFFe9f518),
+        backgroundColor: backColor,
         appBar: AppBar(
-          backgroundColor: Color(0xFFe9f518),
+          backgroundColor: colors,
           elevation: 0,
           automaticallyImplyLeading: false,
           title: Center(
@@ -87,248 +157,330 @@ class _Student_InformationState extends State<Student_Information> {
               "${widget.type} Account",
               style: TextStyle(
                   fontSize: 26,
-                  color: Colors.black,
+                  color: buttonColor,
                   fontWeight: FontWeight.bold),
             ),
           ),
         ),
-        body: Center(
-          child: SingleChildScrollView(
+
+        body: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(left: 25, right: 25),
             child: Column(
               children: [
+                //First Name
+                Padding(
+                  padding: const EdgeInsets.only(top: 20, bottom: 15),
+                  child: TextFormField(
+                    controller: fname,
+                    style: TextStyle(fontSize: 20, color: Color(0xFF777878)),
+                    autofillHints: [AutofillHints.name],
+                    autofocus: false,
+                    decoration: InputDecoration(
+                      labelText: 'First Name',
+                      hintText: 'Enter First Name',
+                      fillColor: Color(0xFFffffff),
+                      filled: true,
+                      labelStyle: TextStyle(fontSize: 16),
+                      hintStyle: TextStyle(fontSize: 16),
+                      prefixIcon: Icon(Icons.account_circle),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                            color: colors,
+                            width: 2
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                          color: Color(0xFFfffff),
+                          width: 2.0,
+                        ),
+                      ),
+                      contentPadding: EdgeInsets.only(top: 10, left: 20),
+                      //suffixIcon: name.text.length > 0 ? Icon(Icons.done) : Icon(Icons.pin)
+                    ),
+                  ),
+                ),
+
+                //Last Name
+                TextFormField(
+                  controller: lname,
+                  style: TextStyle(fontSize: 20, color: Color(0xFF777878)),
+                  autofillHints: [AutofillHints.name],
+                  autofocus: false,
+                  decoration: InputDecoration(
+                    labelText: 'Last Name',
+                    hintText: 'Enter Last Name',
+                    fillColor: Color(0xFFffffff),
+                    filled: true,
+                    labelStyle: TextStyle(fontSize: 16),
+                    hintStyle: TextStyle(fontSize: 16),
+                    prefixIcon: Icon(Icons.account_circle),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(
+                          color: colors,
+                          width: 2
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(
+                        color: Color(0xFFfffff),
+                        width: 2.0,
+                      ),
+                    ),
+                    contentPadding: EdgeInsets.only(top: 10, left: 20),
+                    //suffixIcon: name.text.length > 0 ? Icon(Icons.done) : Icon(Icons.pin)
+                  ),
+                ),
+
+                //Class
+                Padding(
+                  padding: const EdgeInsets.only(top: 15, bottom: 15),
+                  child: TextFormField(
+                    controller: clas,
+                    style: TextStyle(fontSize: 20, color: Color(0xFF777878)),
+                    autofocus: false,
+                    decoration: InputDecoration(
+                      labelText: 'Class',
+                      hintText: 'Enter Your Class',
+                      fillColor: Color(0xFFffffff),
+                      filled: true,
+                      labelStyle: TextStyle(fontSize: 16),
+                      hintStyle: TextStyle(fontSize: 16),
+                      prefixIcon: Icon(Icons.account_circle),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                            color: colors,
+                            width: 2
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                          color: Color(0xFFfffff),
+                          width: 2.0,
+                        ),
+                      ),
+                      contentPadding: EdgeInsets.only(top: 10, left: 20),
+                      //suffixIcon: name.text.length > 0 ? Icon(Icons.done) : Icon(Icons.pin)
+                    ),
+                  ),
+                ),
+
+                //Roll
+                TextFormField(
+                  controller: roll,
+                  style: TextStyle(fontSize: 20, color: Color(0xFF777878)),
+                  autofocus: false,
+                  decoration: InputDecoration(
+                    labelText: 'Roll',
+                    hintText: 'Enter Your Roll',
+                    fillColor: Color(0xFFffffff),
+                    filled: true,
+                    labelStyle: TextStyle(fontSize: 16),
+                    hintStyle: TextStyle(fontSize: 16),
+                    prefixIcon: Icon(Icons.account_circle),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(
+                          color: colors,
+                          width: 2
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(
+                        color: Color(0xFFfffff),
+                        width: 2.0,
+                      ),
+                    ),
+                    contentPadding: EdgeInsets.only(top: 10, left: 20),
+                    //suffixIcon: name.text.length > 0 ? Icon(Icons.done) : Icon(Icons.pin)
+                  ),
+                ),
+
+                //Address
+                Padding(
+                  padding: const EdgeInsets.only(top: 15, bottom: 15),
+                  child: TextFormField(
+                    controller: add,
+                    style: TextStyle(fontSize: 20, color: Color(0xFF777878)),
+                    autofocus: false,
+                    decoration: InputDecoration(
+                      labelText: 'Address',
+                      hintText: 'Enter Your Address',
+                      fillColor: Color(0xFFffffff),
+                      filled: true,
+                      labelStyle: TextStyle(fontSize: 16),
+                      hintStyle: TextStyle(fontSize: 16),
+                      prefixIcon: Icon(Icons.account_circle),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                            color: colors,
+                            width: 2
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                          color: Color(0xFFfffff),
+                          width: 2.0,
+                        ),
+                      ),
+                      contentPadding: EdgeInsets.only(top: 10, left: 20),
+                      //suffixIcon: name.text.length > 0 ? Icon(Icons.done) : Icon(Icons.pin)
+                    ),
+                  ),
+                ),
+
+                //Guardian Name
+                TextFormField(
+                  controller: gName,
+                  style: TextStyle(fontSize: 20, color: Color(0xFF777878)),
+                  autofillHints: [AutofillHints.name],
+                  autofocus: false,
+                  decoration: InputDecoration(
+                    labelText: 'Guardian Name',
+                    hintText: 'Enter Guardian Name',
+                    fillColor: Color(0xFFffffff),
+                    filled: true,
+                    labelStyle: TextStyle(fontSize: 16),
+                    hintStyle: TextStyle(fontSize: 16),
+                    prefixIcon: Icon(Icons.account_circle),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(
+                          color: colors,
+                          width: 2
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(
+                        color: Color(0xFFfffff),
+                        width: 2.0,
+                      ),
+                    ),
+                    contentPadding: EdgeInsets.only(top: 10, left: 20),
+                    //suffixIcon: name.text.length > 0 ? Icon(Icons.done) : Icon(Icons.pin)
+                  ),
+                ),
+
+                //Guardian Number
+                Padding(
+                  padding: const EdgeInsets.only(top: 15, bottom: 30),
+                  child: TextFormField(
+                    controller: gNum,
+                    style: TextStyle(fontSize: 20, color: Color(0xFF777878)),
+                    autofillHints: [AutofillHints.name],
+                    autofocus: false,
+                    decoration: InputDecoration(
+                      labelText: 'Guardian Number',
+                      hintText: 'Enter Guardian Number',
+                      fillColor: Color(0xFFffffff),
+                      filled: true,
+                      labelStyle: TextStyle(fontSize: 16),
+                      hintStyle: TextStyle(fontSize: 16),
+                      prefixIcon: Icon(Icons.account_circle),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                            color: colors,
+                            width: 2
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                          color: Color(0xFFfffff),
+                          width: 2.0,
+                        ),
+                      ),
+                      contentPadding: EdgeInsets.only(top: 10, left: 20),
+                      //suffixIcon: name.text.length > 0 ? Icon(Icons.done) : Icon(Icons.pin)
+                    ),
+                  ),
+                ),
+
                 Container(
                   height: MediaQuery.of(context).size.height * 0.3,
-                  //width: MediaQuery.of(context).size.width * 0.3,
-                  child: _image == null ? Text("") : Image.file(_image),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.01,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FloatingActionButton(
-                      backgroundColor: Colors.white,
-                      onPressed: () {
-                        cameraImage();
-                      },
-                      child: Icon(
-                        Icons.camera_alt_outlined,
-                        //color: Color(0xFFe37c22),
-                        color: Colors.black,
-                      ),
+                  width: MediaQuery.of(context).size.width *0.7,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFffffff),
+                    border: Border.all(
+                        width: 1,
+                        color: colors
                     ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.05,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: _image != null ? Stack(
+                      children:[
+                        Center(child: Image.file(_image,)),
+                        Positioned(
+                            right: -2,
+                            top: -9,
+                            child: IconButton(
+                                icon: Icon(
+                                  Icons.cancel,
+                                  color: Colors.black.withOpacity(0.5),
+                                  size: 18,
+                                ),
+                                onPressed: () => setState(() {
+                                  _image = null;
+                                })))
+                      ]) :
+                  Padding(
+                    padding: const EdgeInsets.only(top: 50, bottom: 50),
+                    child: Column(
+                      children: [
+                        Text('Select Your Image'),
+                        SizedBox(height: 20,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FloatingActionButton(
+                              backgroundColor: Colors.white,
+                              onPressed: () {
+                                cameraImage();
+                              },
+                              child: Icon(
+                                Icons.camera_alt_outlined,
+                                color: Color(0xFFe37c22),
+                              ),
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.05,
+                            ),
+                            FloatingActionButton(
+                              backgroundColor: Colors.white,
+                              onPressed: () {
+                                galleryImage();
+                              },
+                              child: Icon(Icons.photo_library_outlined,
+                                  color: Color(0xFFe37c22)),
+                            )
+                          ],
+                        ),
+                      ],
                     ),
-                    FloatingActionButton(
-                      backgroundColor: Colors.white,
-                      onPressed: () {
-                        galleryImage();
-                      },
-                      child: Icon(Icons.photo_library_outlined,
-                        //    color: Color(0xFFe37c22)
-                        color: Colors.black,
-                      ),
-                    )
-                  ],
+                  ),
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.only(left: 25, right: 25),
-                  child: TextField(
-                    decoration: InputDecoration(hintText: "First Name *"),
-                    onChanged: (input){
-                      setState(() {
-                        _fname=input;
-                      });
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.015,
-                ),
-
-                Padding(
-                  padding: const EdgeInsets.only(left: 25, right: 25),
-                  child: TextFormField(
-                    decoration: InputDecoration(hintText: "Last Name *"),
-                    onChanged: (input){
-                      setState(() {
-                        _lname=input;
-                      });
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.015,
-                ),
-
-                Padding(
-                  padding: const EdgeInsets.only(left: 25, right: 25),
-                  child: TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                        hintText: "Class *"),
-                    onChanged: (input){
-                      setState(() {
-                        _class=input;
-                      });
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.015,
-                ),
-
-                Padding(
-                  padding: const EdgeInsets.only(left: 25, right: 25),
-                  child: TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(hintText: "Roll No. *"),
-                    onChanged: (input){
-                      setState(() {
-                        _roll=input;
-                      });
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.015,
-                ),
-
-                Padding(
-                  padding: const EdgeInsets.only(left: 25, right: 25),
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    decoration:
-                    InputDecoration(hintText: "Present Address *"),
-                    onChanged: (input){
-                      setState(() {
-                        _add=input;
-                      });
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.015,
-                ),
-
-                Padding(
-                  padding: const EdgeInsets.only(left: 25, right: 25),
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(hintText: "Guardian Name *"),
-                    onChanged: (input){
-                      setState(() {
-                        _g_name=input;
-                      });
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.015,
-                ),
-
-                Padding(
-                  padding: const EdgeInsets.only(left: 25, right: 25),
-                  child: TextFormField(
-                    keyboardType: TextInputType.phone,
-                    decoration:
-                    InputDecoration(hintText: "Guardian Contact No. *"),
-                    onChanged: (input){
-                      setState(() {
-                        _g_num=input;
-                      });
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.015,
-                ),
-
-                FlatButton(
-                    color: Colors.black,
-                    minWidth: MediaQuery.of(context).size.width * 0.8,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)
-                    ),
-                    onPressed: () {
+                  padding: const EdgeInsets.only(top: 30),
+                  child: ButtonConfig(
+                    text: 'Save Information',
+                    press: (){
                       sendDataStudent();
-                      if(_image == null){
-                        showDialog(context: context, builder: (BuildContext context){
-                          return AlertDialog(
-                            title: Text('Please Pick Your Image'),
-                          );
-                        });
-                      }
-                      else if(_fname == null){
-                        showDialog(context: context, builder: (BuildContext context){
-                          return AlertDialog(
-                            title: Text('Please Enter your First Name'),
-                          );
-                        });
-                      }
-                      else if(_lname == null){
-                        showDialog(context: context, builder: (BuildContext context){
-                          return AlertDialog(
-                            title: Text('Please Enter Your Last Name'),
-                          );
-                        });
-                      }
-                      else if(_class == null){
-                        showDialog(context: context, builder: (BuildContext context){
-                          return AlertDialog(
-                            title: Text('Please Enter Your Class'),
-                          );
-                        });
-                      }
-                      else if(_roll == null){
-                        showDialog(context: context, builder: (BuildContext context){
-                          return AlertDialog(
-                            title: Text('Please Enter Your Roll No'),
-                          );
-                        });
-                      }
-                      else if(_add == null){
-                        showDialog(context: context, builder: (BuildContext context){
-                          return AlertDialog(
-                            title: Text('Please Enter Your Present Address'),
-                          );
-                        });
-                      }
-                      else if(_g_name == null){
-                        showDialog(context: context, builder: (BuildContext context){
-                          return AlertDialog(
-                            title: Text('Please Enter Your Guardian Name'),
-                          );
-                        });
-                      }
-                      else if(_g_num == null || _g_num.length !=11){
-                        showDialog(context: context, builder: (BuildContext context){
-                          return AlertDialog(
-                            title: Text('Please Enter Your Guardian Contact Number'),
-                          );
-                        });
-                      }
-                      else if(_class == null){
-                        showDialog(context: context, builder: (BuildContext context){
-                          return AlertDialog(
-                            title: Text('Please Enter Your Class'),
-                          );
-                        });
-                      }
-                      // if (_image != null && _fname != null && _lname != null && _class !=null && _roll != null
-                      //     && _add != null && _g_name != null && _g_num != null && _g_num.length == 11){
-                      //   Navigator.push(context, MaterialPageRoute(builder: (context)=>CoverPage()));
-                      // }
-
-                      //Navigator.push(context, MaterialPageRoute(builder: (context)=>Student_SignIn()));
                     },
-                    child: Text("Save Information",style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white
-                    ),))
+                  ),
+                )
               ],
             ),
           ),

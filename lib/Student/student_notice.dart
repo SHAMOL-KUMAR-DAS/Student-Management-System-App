@@ -15,7 +15,7 @@ class _Student_NoticeState extends State<Student_Notice> {
     return Scaffold(
       body: StreamBuilder(
           stream:
-          Firestore.instance.collection("Events").orderBy('Time', descending: false).snapshots(),
+          Firestore.instance.collection("Notice").orderBy('Time', descending: true).snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {
@@ -33,7 +33,7 @@ class _Student_NoticeState extends State<Student_Notice> {
                         SizedBox(height: MediaQuery.of(context).size.height * 0.015,),
                         Center(child: Image(image: NetworkImage(document['Image'] ?? '',scale: 4))),
                         Padding(
-                          padding: const EdgeInsets.only(top: 10, left: 25),
+                          padding: const EdgeInsets.only(left: 25, bottom: 25, top: 15),
                           child: Text(document['Message'] ?? '', style: TextStyle(
                               fontSize: 12,
                               color: Colors.black

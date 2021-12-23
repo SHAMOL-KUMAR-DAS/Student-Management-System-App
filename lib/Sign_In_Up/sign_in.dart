@@ -1,5 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/rendering.dart';
+import 'package:school_management/Config/button_config.dart';
+import 'package:school_management/Config/color_config.dart';
 import 'package:school_management/Sign_In_Up/sign_up.dart';
 import 'package:school_management/Student/home.dart';
 import 'package:school_management/Teacher/home.dart';
@@ -74,84 +78,98 @@ class _Sign_InState extends State<Sign_In> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: backColor,
       appBar: AppBar(
         elevation: 0,
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
+        backgroundColor: colors,
         title: Center(
           child: Text(
             'Login With ${widget.type}',
             style: TextStyle(
-                fontSize: 25, color: Colors.black, fontWeight: FontWeight.bold),
+                fontSize: 25, color: buttonColor, fontWeight: FontWeight.bold),
           ),
         ),
       ),
       body: Form(
         key: _formkey,
-        //scrollDirection: Axis.vertical,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              //Text("Start with signing in",style: TextStyle(fontSize: 20),),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.025,
-              ),
-              Image(image: AssetImage('assets/images/cover_logo.png'),height: 180,),
-              // if (widget.type == 'Teacher')...[
-              //   _Teacher_Sign_In()
-              // ]
-              // else if (widget.type == 'Student')...[
-              //   _Student_Sign_In()
-              // ],
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.03,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 30, right: 30),
-                child:
-                TextFormField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    labelText: "E-Mail",
+        child: Container(
+          padding: EdgeInsets.only(left: 25, right: 25, top: 25),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+
+                Image(image: AssetImage('assets/images/cover_logo.png'),height: 180,),
+
+
+                Padding(
+                  padding: const EdgeInsets.only(top: 25, bottom: 15),
+                  child: TextFormField(
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    autofillHints: [AutofillHints.email],
+                    style: TextStyle(fontSize: 18),
+                    decoration: InputDecoration(
+                      fillColor: textFormColor,
+                      filled: true,
+                      contentPadding: EdgeInsets.only(left: 20, top: 5, bottom: 5),
+                      labelText: 'Email',
+                      hintText: 'Enter Your Email',
+                      prefixIcon: Icon(Icons.mail_outline),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: backColor
+                        ),
+                        borderRadius: BorderRadius.circular(10)
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: colors
+                        ),
+                        borderRadius: BorderRadius.circular(10)
+                      )
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height*0.02,),
-              Column(
-                children: [
-                  //SizedBox(width: MediaQuery.of(context).size.width*0.2,),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 30, right: 30),
-                    child: TextFormField(
-                      controller: _passwordController,
-                      style: TextStyle(color: Colors.black),
-                      obscureText: _obscureText,
 
-                      decoration: InputDecoration(
-                          labelText: "Password",
-                          suffixIcon: InkWell(
-                            //onTap: VisiblePassword,
-                            onTap: _toggle,
-                            child: _obscureText? Icon(Icons.visibility_off):Icon(Icons.visibility),
-                          ),
-                          labelStyle: TextStyle(color: Colors.black)
+                TextFormField(
+                  controller: _passwordController,
+                  style: TextStyle(color: Colors.black),
+                  obscureText: _obscureText,
+                  autofillHints: [AutofillHints.password],
+                  decoration: InputDecoration(
+                    fillColor: textFormColor,
+                      filled: true,
+                      contentPadding: EdgeInsets.only(left: 20, top: 5, bottom: 5),
+                      labelText: "Password",
+                      hintText: 'Enter Your Password',
+                      prefixIcon: Icon(Icons.lock_outline),
+                      enabledBorder: OutlineInputBorder(
+                       borderSide: BorderSide(
+                         color: backColor
+                       ),
+                        borderRadius: BorderRadius.circular(10)
                       ),
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.03,
-              ),
-              FlatButton(
-                  color: Color(0xFFb7bdb9),
-                  minWidth: MediaQuery.of(context).size.width * 0.5,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  onPressed: () {
-                    setState(() {
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: backColor
+                        ),
+                        borderRadius: BorderRadius.circular(10)
+                      ),
+                      suffixIcon: InkWell(
+                        //onTap: VisiblePassword,
+                        onTap: _toggle,
+                        child: _obscureText? Icon(Icons.visibility_off):Icon(Icons.visibility),
+                      ),
+                    
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.only(top: 15, bottom: 30),
+                  child: ButtonConfig(
+                    text: 'Sign In',
+                    press: (){
                       SignIn();
                       if(_emailController.text.isEmpty){
                         showDialog(context: context, builder: (BuildContext context) {
@@ -165,66 +183,25 @@ class _Sign_InState extends State<Sign_In> {
                             title: Text("Please Enter an Password"),
                           );});
                       }
-                      // else{
-                      //   showDialog(context: context, builder: (BuildContext context) {
-                      //     return AlertDialog(
-                      //       title: Text("Please Enter an Valid Password"),
-                      //     );});
-                      // }
-                    });
-                  },
-                  child: Text("Sign In")),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.04,
-              ),
-              Text("Don't have an Account?"),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.01,
-              ),
-              FlatButton(
-                  color: Color(0xFFb7bdb9),
-                  minWidth: MediaQuery.of(context).size.width * 0.5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    },
                   ),
-                  onPressed: () {
-                    // if(_email.isEmpty && _password.isEmpty || _email.isEmpty || _password.isEmpty){
-                    // _showDeleteDialog() {
-                    //   showDialog(
-                    //       context: context,
-                    //       builder: (context) {
-                    //         return AlertDialog(
-                    //           title: Text('Delete'),
-                    //           content: Text('Are you sure want to delete?'),
-                    //           actions: [
-                    //             FlatButton(
-                    //                 onPressed: () {
-                    //                   Navigator.pop(context);
-                    //                 },
-                    //                 child: Text('Ok')),
-                    //           ],
-                    //         );
-                    //       });
-                    // }}
+                ),
+
+                Text("Don't have an Account?"),
+
+                ButtonConfig(
+                  text: 'Sign Up',
+                  press: (){
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Sign_up(widget.type)));
                   },
-                  child: Text("Sign Up",style: TextStyle(color: Colors.black),))
-            ],
+                )
+
+              ],
+            ),
           ),
         ),
       ),
     );
   }
-  // Widget _Teacher_Sign_In(){
-  //   Container(
-  //       height: MediaQuery.of(context).size.height * 0.2,
-  //       child: Image(image: AssetImage('assets/images/teacher_in.png')));
-  // }
-  //
-  // Widget _Student_Sign_In(){
-  //   Container(
-  //       height: MediaQuery.of(context).size.height * 0.2,
-  //       child: Image(image: AssetImage('assets/images/stu_background.png')));
-  // }
 }

@@ -15,7 +15,7 @@ class _RoutineState extends State<Routine> {
   _fetch()async{
     final firebaseUser = await FirebaseAuth.instance.currentUser();
     if(firebaseUser!=null)
-      await Firestore.instance.collection('student_information').document(firebaseUser.uid).get().then((ds){
+      await Firestore.instance.collection('Routine').document(firebaseUser.uid).get().then((ds){
         _sub1=ds.data['Subject_1'];
         _teacher1=ds.data['Teacher_1'];
         _sub2=ds.data['Subject_2'];
@@ -32,20 +32,14 @@ class _RoutineState extends State<Routine> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF272b28),
-
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Color(0xFF272b28),
+        elevation: 0,
+      ),
       body: Center(
         child: Column(
           children: [
-            SizedBox(height: MediaQuery.of(context).size.height * 0.15,),
-            WavyAnimatedTextKit(
-              text: ["Class Routine..."],
-              textStyle: TextStyle(
-                fontSize: 32,
-                color: Colors.white,
-                fontWeight: FontWeight.w400
-              ),
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.1,),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: FutureBuilder(

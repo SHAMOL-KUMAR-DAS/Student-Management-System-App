@@ -41,7 +41,7 @@ class Get_Class with ChangeNotifier {
     String imgurl = await (await put.onComplete).ref.getDownloadURL();
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
     await (imgurl);
-    Firestore.instance.collection('Events').document().setData({
+    Firestore.instance.collection('Notice').document().setData({
       'Image': imgurl,
       'Message': notice.text,
       'Time': DateTime.now(),

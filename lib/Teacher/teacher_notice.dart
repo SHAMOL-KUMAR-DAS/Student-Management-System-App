@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:school_management/Provider/image_get.dart';
+import 'package:school_management/Teacher/home.dart';
 
 class Teacher_Notice extends StatefulWidget {
   String type;
@@ -31,14 +32,14 @@ class _Teacher_NoticeState extends State<Teacher_Notice> {
         child: Column(
           children: [
             //SizedBox(height: MediaQuery.of(context).size.height * 0.15,),
-            WavyAnimatedTextKit(
-              textStyle: TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 32
-              ),
-              text: ["Upcoming Events..."],
-              isRepeatingAnimation: false,
-            ),
+            // WavyAnimatedTextKit(
+            //   textStyle: TextStyle(
+            //     fontWeight: FontWeight.w400,
+            //     fontSize: 32
+            //   ),
+            //   text: ["Upcoming Events..."],
+            //   isRepeatingAnimation: false,
+            // ),
             Padding(
               padding: const EdgeInsets.only(top: 10, bottom: 10),
               child: Container(
@@ -101,8 +102,8 @@ class _Teacher_NoticeState extends State<Teacher_Notice> {
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomRight: Radius.circular(10))
               ),
               onPressed: (){
-                print(_get_class.notice.text);
                 _get_class.sendData();
+                Navigator.pop(context);
               },
               child: Text('Put Notice',style: TextStyle(
                   fontSize: 20

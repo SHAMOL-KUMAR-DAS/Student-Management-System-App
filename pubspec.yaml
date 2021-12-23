@@ -41,6 +41,8 @@ dependencies:
   firebase_storage:
   intl: ^0.17.0
   provider: ^6.0.0
+  google_fonts: ^2.1.0
+  pinput: ^1.2.0
   #firebase_phone_auth_handler: ^0.0.3
 
 dev_dependencies:
